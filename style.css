@@ -1117,7 +1117,6 @@ footer.footer-dark {
 .comparison-split {
     display: flex;
     width: 100%;
-    margin-top: -40px;
     align-items: flex-start;
 }
 
