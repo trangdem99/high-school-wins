@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High School Wins - Design Template Reference</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Template-only: section dividers for reference display */
+        .template-divider {
+            background: #333;
+            color: #FFD700;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.75rem 1.5rem;
+            margin: 3rem 0 0;
+            text-align: center;
+            max-width: var(--container-max);
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .template-divider:first-of-type {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- =====================================================================
+     SECTION A: SITE HEADER
+     Common across all pages. Title links to home on sub-pages.
+     ===================================================================== -->
+<div class="template-divider">A. Site Header</div>
+
+<header>
+    <div class="site-header">
+        <div>
+            <div class="site-title"><a href="#">HIGH SCHOOL WINS</a></div>
+            <div class="site-subtitle">Sports Archive Collection</div>
+        </div>
+    </div>
+</header>
+
+
+<!-- =====================================================================
+     SECTION B: HOME PAGE - State Selection
+     Grid of available + coming-soon states.
+     ===================================================================== -->
+<div class="template-divider">B. Home Page &mdash; State Selection</div>
+
+<div class="container">
+    <div class="selection-card">
+        <div class="selection-header">
+            <h1>Select a State</h1>
+            <p>Choose a state to browse high school sports archives</p>
+        </div>
+
+        <!-- Available States -->
+        <div class="state-grid">
+            <a href="#" class="state-card">
+                <div class="state-name">Iowa</div>
+                <div class="state-info">1 Team Available</div>
+            </a>
+            <a href="#" class="state-card">
+                <div class="state-name">Minnesota</div>
+                <div class="state-info">3 Teams Available</div>
+            </a>
+            <a href="#" class="state-card disabled">
+                <div class="state-name">Nebraska</div>
+                <div class="state-info">Coming Soon</div>
+            </a>
+        </div>
+
+        <!-- Coming Soon States -->
+        <div class="coming-soon-section">
+            <div class="coming-soon-header">More States Coming Soon</div>
+            <div class="coming-soon-grid">
+                <span class="coming-soon-state">South Dakota</span>
+                <span class="coming-soon-state">Wisconsin</span>
+                <span class="coming-soon-state">Illinois</span>
+                <span class="coming-soon-state">Missouri</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION C: STATE PAGE - School List with Filters
+     Breadcrumb + filterable list of schools in a state.
+     ===================================================================== -->
+<div class="template-divider">C. State Page &mdash; School List</div>
+
+<div class="container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="#">HOME</a>
+        <span>&gt;</span>
+        <strong>IOWA</strong>
+    </div>
+
+    <div class="selection-card">
+        <div class="selection-header">
+            <h1>Iowa Schools</h1>
+            <p>Select a school to view sports archives</p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-header">
+            <input type="text" class="filter-input" placeholder="Search schools...">
+            <select class="filter-select">
+                <option value="">All Conferences</option>
+                <option value="Western Valley">Western Valley</option>
+            </select>
+        </div>
+
+        <!-- School List -->
+        <div class="school-list">
+            <a href="#" class="school-card">
+                <div class="school-logo" style="background-color: #FF8C00; border: 3px solid #FFD700; color: #000;">R</div>
+                <div class="school-name">Ridge View Raptors</div>
+            </a>
+            <a href="#" class="school-card">
+                <div class="school-logo" style="background-color: #000; border: 3px solid #C0C0C0; color: #C0C0C0;">F</div>
+                <div class="school-name">OABCIG Falcons</div>
+            </a>
+            <a href="#" class="school-card">
+                <div class="school-logo" style="background-color: #B22222; border: 3px solid #FFD700; color: #FFF;">B</div>
+                <div class="school-name">Cherokee Washington Braves</div>
+            </a>
+        </div>
+        <div class="no-results">No schools match your filters</div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION D: SCHOOL PROFILE - Classification & Filing Bars
+     Top-level metadata bars on profile and game log pages.
+     ===================================================================== -->
+<div class="template-divider">D. Classification &amp; Filing Bars</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <!-- Classification Bar -->
+        <div class="classification-bar">
+            <span>CLASSIFICATION: <a href="#" class="breadcrumb-link">IOWA</a> &gt; RIDGE VIEW &gt; FOOTBALL</span>
+            <span class="catalog-number">CAT. NO. IA-FTB-WVC-RV</span>
+        </div>
+
+        <!-- Filing Bar (with sport dropdown) -->
+        <div class="filing-bar filing-bar-split">
+            <div class="filing-items-left">
+                <div class="filing-item">
+                    <span class="filing-label">FILED UNDER:</span>
+                    <span class="filing-value">Western Valley Conference</span>
+                </div>
+                <div class="filing-item">
+                    <span class="filing-label">LOCATION:</span>
+                    <span class="filing-value">Holstein, Iowa</span>
+                </div>
+                <div class="filing-item">
+                    <span class="filing-label">CLASS:</span>
+                    <span class="filing-value">1A</span>
+                </div>
+            </div>
+            <div class="sport-dropdown" id="sportDropdownDemo">
+                <div class="sport-trigger">
+                    <span class="filing-label">SPORT:</span>
+                    <span class="filing-value">Football</span>
+                    <span class="sport-chevron">&#9660;</span>
+                </div>
+                <div class="sport-menu">
+                    <div class="sport-menu-columns">
+                        <div class="sport-column">
+                            <div class="sport-column-header">Girls</div>
+                            <ul>
+                                <li><a href="#" class="disabled">Volleyball</a></li>
+                                <li><a href="#" class="disabled">Basketball</a></li>
+                                <li><a href="#" class="disabled">Softball</a></li>
+                            </ul>
+                        </div>
+                        <div class="sport-column">
+                            <div class="sport-column-header">Boys</div>
+                            <ul>
+                                <li><a href="#" class="active">Football</a></li>
+                                <li><a href="#" class="disabled">Basketball</a></li>
+                                <li><a href="#" class="disabled">Baseball</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION E: ARTICLE HEADER - Single Team Profile
+     Team logo, name, mascot, colors, and all-time record.
+     ===================================================================== -->
+<div class="template-divider">E. Article Header &mdash; Single Team</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="article-header">
+            <div class="team-logo">R</div>
+            <button class="compare-button">Compare Team</button>
+
+            <div class="header-text">
+                <h1 class="headline">RIDGE VIEW</h1>
+                <h2 class="mascot-name">RAPTORS</h2>
+                <p class="subheadline">Football</p>
+
+                <div class="team-colors">
+                    <div class="color-box" style="background-color: #FF8C00;"></div>
+                    <div class="color-box" style="background-color: #FFD700;"></div>
+                    <div class="color-box" style="background-color: #000000;"></div>
+                </div>
+
+                <div class="all-time-record">ALL-TIME RECORD: 6-4-0</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION F: STATS SECTION - Single Team Mode
+     All-time stats with rank badges.
+     ===================================================================== -->
+<div class="template-divider">F. Stats Section &mdash; Single Team</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="stats-section">
+            <h3 class="section-title">I. All-Time Stats</h3>
+            <div class="rank-note">&#9733; Rank = among 17 teams &#9733;</div>
+
+            <div class="stats-columns">
+                <div class="stats-container left">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Win/Loss</div>
+                            <div class="stat-value">
+                                .600
+                                <span class="stat-rank-badge">Rank: <span class="rank-position">5th</span></span>
+                            </div>
+                            <div class="stat-record">6-4-0</div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-label">State Titles</div>
+                            <div class="stat-value">
+                                0
+                                <span class="stat-rank-badge">Rank: <span class="rank-position">T-1st</span></span>
+                            </div>
+                            <div class="stat-record">0-0</div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-label">Playoff Appearances</div>
+                            <div class="stat-value">
+                                1
+                                <span class="stat-rank-badge">Rank: <span class="rank-position">T-1st</span></span>
+                            </div>
+                            <div class="stat-note">Postseason qualifications</div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-label">Playoff Record</div>
+                            <div class="stat-value">
+                                .500
+                                <span class="stat-rank-badge">Rank: <span class="rank-position">2nd</span></span>
+                            </div>
+                            <div class="stat-record">1-1</div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-label">District Record</div>
+                            <div class="stat-value">
+                                .800
+                                <span class="stat-rank-badge">Rank: <span class="rank-position">2nd</span></span>
+                            </div>
+                            <div class="stat-record">4-1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION G: COMPARISON MODE - Side-by-Side Stats
+     Stats section in comparison mode with winner accent bars.
+     ===================================================================== -->
+<div class="template-divider">G. Comparison Mode &mdash; Side-by-Side Stats</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <!-- Comparison Header -->
+        <div class="comparison-header active">
+            <div class="comparison-split">
+                <div class="comparison-team left">
+                    <h1 class="comparison-headline">Ridge View</h1>
+                    <h2 class="comparison-mascot">Raptors</h2>
+                    <p class="comparison-subheadline">Football</p>
+                    <div class="comparison-record">ALL-TIME: 6-4</div>
+                </div>
+                <div class="comparison-team right">
+                    <h1 class="comparison-headline">OABCIG</h1>
+                    <h2 class="comparison-mascot">Falcons</h2>
+                    <p class="comparison-subheadline">Football</p>
+                    <div class="comparison-record">ALL-TIME: 1-0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section comparison-mode">
+            <h3 class="section-title">I. All-Time Stats</h3>
+            <div class="rank-note">&#9733; Rank = among 17 teams &#9733;</div>
+
+            <div class="stats-columns">
+                <!-- Left Team -->
+                <div class="stats-container left">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Win/Loss</div>
+                            <div class="stat-value">.600</div>
+                            <div class="stat-record">6-4-0</div>
+                        </div>
+                        <div class="stat-item winner">
+                            <div class="stat-label">Playoff Appearances</div>
+                            <div class="stat-value">1</div>
+                            <div class="stat-note">Postseason qualifications</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Team -->
+                <div class="stats-container right">
+                    <div class="stats-grid">
+                        <div class="stat-item winner" style="border-left-color: #000;">
+                            <div class="stat-label">Win/Loss</div>
+                            <div class="stat-value" style="color: #000;">1.000</div>
+                            <div class="stat-record">1-0-0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Playoff Appearances</div>
+                            <div class="stat-value" style="color: #000;">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION H: HEAD-TO-HEAD SECTION
+     Comparison cards and matchup table.
+     ===================================================================== -->
+<div class="template-divider">H. Head-to-Head Section</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="table-section">
+            <h3 class="section-title">III. Head to Head</h3>
+            <div class="h2h-matchups-note">&#9733; Total Match-ups = 1 &#9733;</div>
+
+            <div class="h2h-wins-cards">
+                <div class="h2h-card-container left">
+                    <div class="h2h-card">
+                        <div class="h2h-card-label">Wins</div>
+                        <div class="h2h-card-value">0</div>
+                    </div>
+                </div>
+                <div class="h2h-card-container right">
+                    <div class="h2h-card winner" style="border-left-color: #000;">
+                        <div class="h2h-card-label">Wins</div>
+                        <div class="h2h-card-value" style="color: #000;">1</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="h2h-wins-cards">
+                <div class="h2h-card-container left">
+                    <div class="h2h-card">
+                        <div class="h2h-card-label">Longest Win Streak</div>
+                        <div class="h2h-card-value">0</div>
+                    </div>
+                </div>
+                <div class="h2h-card-container right">
+                    <div class="h2h-card winner" style="border-left-color: #000;">
+                        <div class="h2h-card-label">Longest Win Streak</div>
+                        <div class="h2h-card-value" style="color: #000;">1</div>
+                        <div class="h2h-card-note">Active</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="h2h-wins-cards">
+                <div class="h2h-card-container left">
+                    <div class="h2h-card">
+                        <div class="h2h-card-label">Largest Victory</div>
+                        <div class="h2h-card-value">--</div>
+                    </div>
+                </div>
+                <div class="h2h-card-container right">
+                    <div class="h2h-card winner" style="border-left-color: #000;">
+                        <div class="h2h-card-label">Largest Victory</div>
+                        <div class="h2h-card-value" style="color: #000;">17</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="head-to-head-container table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th class="team-column">Ridge View</th>
+                            <th class="team-column">OABCIG</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aug 29, 2025</td>
+                            <td style="text-align:center; font-weight:700; color:#999;">7</td>
+                            <td style="text-align:center; font-weight:700; font-size:1.1rem;">24</td>
+                            <td>Holstein, IA</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION I: CHART SECTION
+     Cumulative win differential line chart.
+     ===================================================================== -->
+<div class="template-divider">I. Chart Section</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="chart-section">
+            <h3 class="section-title">II. Cumulative Win Differential</h3>
+            <p class="section-subtitle">Wins - losses. A great way to see program winning trends over time</p>
+            <div class="chart-container">
+                <canvas id="demoChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION J: SEASON-BY-SEASON TABLE
+     Sortable data table with game log link.
+     ===================================================================== -->
+<div class="template-divider">J. Season-by-Season Table</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="table-section">
+            <div class="section-header-with-filters">
+                <h3 class="section-title">III. Season-by-Season Index</h3>
+                <a href="#" class="game-log-button">View All Time Game Log</a>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Season</th>
+                            <th>Record</th>
+                            <th>Win %</th>
+                            <th>Class</th>
+                            <th>Conference</th>
+                            <th>Postseason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2025</td>
+                            <td>6-4</td>
+                            <td>.600</td>
+                            <td>1A</td>
+                            <td>Western Valley</td>
+                            <td>Playoff Round 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION K: OPPONENT TABLE with Filters & Sorting
+     Filterable, sortable opponent index table.
+     ===================================================================== -->
+<div class="template-divider">K. Opponent Table with Filters &amp; Sorting</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="table-section">
+            <div class="section-header-with-filters">
+                <h3 class="section-title">IV. All-Time Opponent Index</h3>
+                <div class="filter-controls">
+                    <input type="text" class="filter-input" placeholder="Search">
+                    <select class="filter-select">
+                        <option value="">All Conferences</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">All Classes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="sortable">Opponent</th>
+                            <th class="sortable">Games</th>
+                            <th class="sortable">W</th>
+                            <th class="sortable">L</th>
+                            <th class="sortable">T</th>
+                            <th class="sortable">Win %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Alta-Aurelia</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1.000</td>
+                        </tr>
+                        <tr>
+                            <td>OABCIG</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>.000</td>
+                        </tr>
+                        <tr>
+                            <td>West Lyon</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION L: GAME LOG PAGE HEADER
+     Page header with team logo, title, back button, and summary stats.
+     ===================================================================== -->
+<div class="template-divider">L. Game Log &mdash; Header &amp; Summary</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <!-- Classification Bar -->
+        <div class="classification-bar">
+            <span>CLASSIFICATION: <a href="#" class="breadcrumb-link">IOWA</a> &gt; RIDGE VIEW &gt; FOOTBALL &gt; GAME LOG</span>
+            <span class="catalog-number">CAT. NO. IA-FTB-WVC-RV-GL</span>
+        </div>
+
+        <!-- Filing Bar -->
+        <div class="filing-bar">
+            <div class="filing-item">
+                <span class="filing-label">DOCUMENT TYPE:</span>
+                <span class="filing-value">All Time Game Log</span>
+            </div>
+            <div class="filing-item">
+                <span class="filing-label">TEAM:</span>
+                <span class="filing-value">Ridge View Raptors</span>
+            </div>
+            <div class="filing-item">
+                <span class="filing-label">SPORT:</span>
+                <span class="filing-value">Football</span>
+            </div>
+            <div class="filing-item">
+                <span class="filing-label">TOTAL GAMES:</span>
+                <span class="filing-value">10</span>
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <div class="article-header" style="position: relative;">
+            <div class="team-logo team-logo-sm">R</div>
+            <a href="#" class="back-button">&larr; Back to Profile</a>
+            <h1 class="page-title">All Time Game Log</h1>
+            <p class="page-subtitle">Ridge View Raptors Football</p>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="summary-section">
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-value">10</div>
+                    <div class="summary-label">Total Games</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">6</div>
+                    <div class="summary-label">Wins</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">4</div>
+                    <div class="summary-label">Losses</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">.600</div>
+                    <div class="summary-label">Win %</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">247</div>
+                    <div class="summary-label">Points For</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">189</div>
+                    <div class="summary-label">Points Against</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION M: GAME LOG TABLE
+     Season game-by-game results with badges.
+     ===================================================================== -->
+<div class="template-divider">M. Game Log &mdash; Season Table</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="season-section">
+            <h3 class="section-title">2025 Season</h3>
+            <div class="season-record">Record: 6-4 (4-1 District) | Playoff Result: Second Round | Class: 1A</div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Opponent</th>
+                            <th>Result</th>
+                            <th>Score</th>
+                            <th>Location</th>
+                            <th>Notes</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Aug 29, 2025</td>
+                        <td>OABCIG Falcons</td>
+                        <td><span class="result-loss">L</span></td>
+                        <td>7-24</td>
+                        <td>Holstein</td>
+                        <td>Season Opener</td>
+                        <td><a href="#" class="source-link">GoBound</a></td>
+                    </tr>
+                    <tr>
+                        <td>Sep 5, 2025</td>
+                        <td>South Central Calhoun Titans</td>
+                        <td><span class="result-win">W</span></td>
+                        <td>28-6</td>
+                        <td>Holstein</td>
+                        <td></td>
+                        <td><a href="#" class="source-link">GoBound</a></td>
+                    </tr>
+                    <tr>
+                        <td>Sep 26, 2025</td>
+                        <td>Lawton-Bronson Eagles</td>
+                        <td><span class="result-win">W</span></td>
+                        <td>42-0</td>
+                        <td>Holstein</td>
+                        <td><span class="game-type district-badge">District</span> Homecoming</td>
+                        <td><a href="#" class="source-link">GoBound</a></td>
+                    </tr>
+                    <tr>
+                        <td>Oct 24, 2025</td>
+                        <td>Tri-Center Trojans</td>
+                        <td><span class="result-win">W</span></td>
+                        <td>42-27</td>
+                        <td>Holstein</td>
+                        <td><span class="game-type playoff-badge">Playoff</span> Class 1A First Round</td>
+                        <td><a href="#" class="source-link">GoBound</a></td>
+                    </tr>
+                    <tr>
+                        <td>Oct 31, 2025</td>
+                        <td>@ South Hardin Tigers</td>
+                        <td><span class="result-loss">L</span></td>
+                        <td>0-20</td>
+                        <td>--</td>
+                        <td><span class="game-type playoff-badge">Playoff</span> Class 1A Second Round</td>
+                        <td><a href="#" class="source-link">GoBound</a></td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Source Note -->
+        <div class="source-note">
+            Data sourced from <a href="#">gobound.com</a> - Iowa High School Athletic Association Official Records
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION N: COMPARISON INDICATOR OPTIONS (Design Samples)
+     Accent bar indicator style for comparison mode.
+     ===================================================================== -->
+<div class="template-divider">N. Comparison Indicator Options (Design Samples)</div>
+
+<div class="container">
+    <!-- Option: Accent Bar (selected approach) -->
+    <div class="option-section">
+        <div class="option-header">COMPARISON INDICATOR: Accent Bar / Border</div>
+        <div class="option-description">
+            A 4px colored bar appears on the left edge of the winning stat card, using the winning team's color. Ties have no accent bar.
+        </div>
+        <div class="option-content">
+            <div class="stats-columns">
+                <div class="stats-container left">
+                    <div class="stat-item">
+                        <div class="stat-label">Win/Loss</div>
+                        <div class="stat-value" style="color: #FF8C00;">.600</div>
+                        <div class="stat-record">6-4-0</div>
+                    </div>
+                    <div class="stat-item" style="border-left: 4px solid #FF8C00; padding-left: 0.75rem; margin-left: -0.75rem;">
+                        <div class="stat-label">Playoff Appearances</div>
+                        <div class="stat-value" style="color: #FF8C00;">1</div>
+                    </div>
+                </div>
+                <div class="stats-container right">
+                    <div class="stat-item" style="border-left: 4px solid #000; padding-left: 0.75rem; margin-left: -0.75rem;">
+                        <div class="stat-label">Win/Loss</div>
+                        <div class="stat-value" style="color: #000;">1.000</div>
+                        <div class="stat-record">1-0-0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Playoff Appearances</div>
+                        <div class="stat-value" style="color: #000;">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legend">
+                <div class="legend-title">LEGEND:</div>
+                <div class="legend-item"><span style="display:inline-block;width:4px;height:16px;background:#FF8C00;margin-right:4px;"></span> Orange bar = Team A wins</div>
+                <div class="legend-item"><span style="display:inline-block;width:4px;height:16px;background:#000;margin-right:4px;"></span> Black bar = Team B wins</div>
+                <div class="legend-item">No bar = Tie</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION O: FORM INPUT COMPONENTS
+     Text inputs, textareas, selects, checkboxes, radios, toggles.
+     Default, focus, disabled, and error states.
+     ===================================================================== -->
+<div class="template-divider">O. Form Input Components</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="card-header">
+            <div class="card-title">Form Components</div>
+            <div class="card-subtitle">Inputs, selects, checkboxes, radios, toggles &mdash; all states</div>
+        </div>
+        <div class="card-body">
+
+            <!-- Text Inputs -->
+            <h3 class="section-title" style="margin-bottom: var(--space-lg);">Text Inputs</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Team Name <span class="required">*</span></label>
+                    <input type="text" class="form-input" placeholder="e.g. Ridge View Raptors">
+                    <span class="form-hint">Enter the full team name including mascot</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text" class="form-input" placeholder="e.g. Holstein, Iowa">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group has-error">
+                    <label class="form-label">Season Year <span class="required">*</span></label>
+                    <input type="text" class="form-input" value="20XX">
+                    <span class="form-error">Please enter a valid 4-digit year</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Catalog Number</label>
+                    <input type="text" class="form-input" disabled value="IA-FTB-WVC-RV">
+                    <span class="form-hint">Auto-generated &mdash; not editable</span>
+                </div>
+            </div>
+
+            <!-- Input with Addon -->
+            <div class="form-group">
+                <label class="form-label">Win Percentage</label>
+                <div class="form-input-group">
+                    <input type="text" class="form-input" placeholder="0.600">
+                    <span class="form-input-addon">%</span>
+                </div>
+            </div>
+
+            <!-- Textarea -->
+            <h3 class="section-title" style="margin-top: var(--space-xl); margin-bottom: var(--space-lg);">Textarea</h3>
+
+            <div class="form-group">
+                <label class="form-label">Game Notes</label>
+                <textarea class="form-textarea" placeholder="Add notes about the game, weather conditions, key plays..."></textarea>
+            </div>
+
+            <div class="form-group has-error">
+                <label class="form-label">Required Notes <span class="required">*</span></label>
+                <textarea class="form-textarea" placeholder="This field is required"></textarea>
+                <span class="form-error">This field cannot be empty</span>
+            </div>
+
+            <!-- Selects -->
+            <h3 class="section-title" style="margin-top: var(--space-xl); margin-bottom: var(--space-lg);">Select Dropdowns</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">State</label>
+                    <select class="form-select">
+                        <option value="">Select a state...</option>
+                        <option value="IA">Iowa</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="NE">Nebraska</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Conference</label>
+                    <select class="form-select" disabled>
+                        <option>Select state first</option>
+                    </select>
+                    <span class="form-hint">Disabled until a state is selected</span>
+                </div>
+            </div>
+
+            <!-- Checkboxes -->
+            <h3 class="section-title" style="margin-top: var(--space-xl); margin-bottom: var(--space-lg);">Checkboxes</h3>
+
+            <div class="form-group">
+                <label class="form-label">Sports to Track</label>
+                <label class="form-check">
+                    <input type="checkbox" checked>
+                    <span class="form-check-label">Football</span>
+                </label>
+                <label class="form-check">
+                    <input type="checkbox">
+                    <span class="form-check-label">Basketball</span>
+                </label>
+                <label class="form-check">
+                    <input type="checkbox">
+                    <span class="form-check-label">Volleyball</span>
+                </label>
+                <label class="form-check">
+                    <input type="checkbox" disabled>
+                    <span class="form-check-label">Baseball (Coming Soon)</span>
+                </label>
+            </div>
+
+            <!-- Radio Buttons -->
+            <h3 class="section-title" style="margin-top: var(--space-xl); margin-bottom: var(--space-lg);">Radio Buttons</h3>
+
+            <div class="form-group">
+                <label class="form-label">Classification</label>
+                <label class="form-check">
+                    <input type="radio" name="class-demo" value="1A" checked>
+                    <span class="form-check-label">Class 1A</span>
+                </label>
+                <label class="form-check">
+                    <input type="radio" name="class-demo" value="2A">
+                    <span class="form-check-label">Class 2A</span>
+                </label>
+                <label class="form-check">
+                    <input type="radio" name="class-demo" value="3A">
+                    <span class="form-check-label">Class 3A</span>
+                </label>
+                <label class="form-check">
+                    <input type="radio" name="class-demo" value="4A" disabled>
+                    <span class="form-check-label">Class 4A (Unavailable)</span>
+                </label>
+            </div>
+
+            <!-- Toggle Switches -->
+            <h3 class="section-title" style="margin-top: var(--space-xl); margin-bottom: var(--space-lg);">Toggle Switches</h3>
+
+            <div class="form-group">
+                <label class="form-toggle">
+                    <input type="checkbox" checked>
+                    <span>Show playoff games</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-toggle">
+                    <input type="checkbox">
+                    <span>Include district records only</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-toggle">
+                    <input type="checkbox" disabled>
+                    <span>Advanced stats (Coming Soon)</span>
+                </label>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION P: BUTTON COMPONENTS
+     Primary and secondary button styles, button groups.
+     ===================================================================== -->
+<div class="template-divider">P. Button Components</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="card-body" style="padding: 2rem;">
+            <div class="button-group">
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-secondary">Secondary Button</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION Q: MODAL
+     Overlay dialogs for confirmations, forms, and details.
+     ===================================================================== -->
+<div class="template-divider">Q. Modal</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="card-header">
+            <div class="card-title">Modal Dialog</div>
+            <div class="card-subtitle">Overlay dialogs for confirmations, forms, and detailed views</div>
+        </div>
+        <div class="card-body">
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="document.getElementById('demoModal').classList.add('active')">Open Modal</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('demoModalSm').classList.add('active')">Small Modal</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('demoModalLg').classList.add('active')">Large Modal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Demo Modals (hidden until triggered) -->
+<div class="modal-overlay" id="demoModal" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="modal-title">Confirm Action</span>
+            <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('active')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to compare <strong>Ridge View Raptors</strong> with another team? This will load the comparison view with side-by-side statistics.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').classList.remove('active')">Cancel</button>
+            <button class="btn btn-primary" onclick="this.closest('.modal-overlay').classList.remove('active')">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="demoModalSm" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="modal modal-sm">
+        <div class="modal-header">
+            <span class="modal-title">Notice</span>
+            <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('active')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Data for this team will be available soon. Check back later for updated records.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="this.closest('.modal-overlay').classList.remove('active')">OK</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="demoModalLg" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="modal modal-lg">
+        <div class="modal-header">
+            <span class="modal-title">Season Details</span>
+            <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('active')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <h3 class="section-title">2025 Season Summary</h3>
+            <p style="margin-bottom: var(--space-md);">The Ridge View Raptors finished the 2025 season with a 6-4 record, qualifying for the Class 1A playoffs. Key highlights included a dominant 42-0 homecoming victory over Lawton-Bronson and a first-round playoff win against Tri-Center.</p>
+            <p>The season ended with a second-round loss to South Hardin, but the program showed significant promise in its early years of competition.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').classList.remove('active')">Close</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION R: ACCORDION / COLLAPSE
+     Expandable content panels for organizing information.
+     ===================================================================== -->
+<div class="template-divider">R. Accordion / Collapse</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="card-header">
+            <div class="card-title">Accordion</div>
+            <div class="card-subtitle">Collapsible content sections for organizing information</div>
+        </div>
+        <div class="card-body">
+            <div class="accordion">
+                <div class="accordion-item active">
+                    <button class="accordion-trigger" onclick="this.parentElement.classList.toggle('active')">
+                        <span>Season Overview</span>
+                        <span class="accordion-icon">&#9660;</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            The Ridge View Raptors completed their 2025 season with a 6-4 overall record and a 4-1 district record. The team qualified for the Class 1A playoffs and advanced to the second round before falling to South Hardin.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="this.parentElement.classList.toggle('active')">
+                        <span>Key Statistics</span>
+                        <span class="accordion-icon">&#9660;</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Points Scored: 247 &bull; Points Allowed: 189 &bull; Point Differential: +58. The Raptors averaged 24.7 points per game on offense while allowing 18.9 points per game on defense.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="this.parentElement.classList.toggle('active')">
+                        <span>Conference Standings</span>
+                        <span class="accordion-icon">&#9660;</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            The Western Valley Conference featured competitive matchups throughout the 2025 season. Ridge View finished among the top teams with their strong district record.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION S: SPINNERS & LOADING STATES
+     Loading indicators for async operations and data fetching.
+     ===================================================================== -->
+<div class="template-divider">S. Spinners &amp; Loading States</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="card-header">
+            <div class="card-title">Spinners &amp; Loading</div>
+            <div class="card-subtitle">Loading indicators for async operations and data fetching</div>
+        </div>
+        <div class="card-body">
+
+            <!-- Spinner Sizes -->
+            <h3 class="section-title" style="margin-bottom: var(--space-lg);">Spinner Sizes</h3>
+            <div style="display: flex; align-items: center; gap: var(--space-xl); flex-wrap: wrap; margin-bottom: var(--space-xl);">
+                <div style="text-align: center;">
+                    <div class="spinner spinner-sm"></div>
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; margin-top: var(--space-sm); color: var(--color-text-muted);">SM</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="spinner"></div>
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; margin-top: var(--space-sm); color: var(--color-text-muted);">DEFAULT</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="spinner spinner-lg"></div>
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; margin-top: var(--space-sm); color: var(--color-text-muted);">LG</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="spinner spinner-xl"></div>
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; margin-top: var(--space-sm); color: var(--color-text-muted);">XL</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="spinner spinner-lg spinner-primary"></div>
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; margin-top: var(--space-sm); color: var(--color-text-muted);">PRIMARY</div>
+                </div>
+            </div>
+
+            <!-- Dots Spinner -->
+            <h3 class="section-title" style="margin-bottom: var(--space-lg);">Dots Spinner</h3>
+            <div style="margin-bottom: var(--space-xl);">
+                <div class="spinner-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <!-- Loading Inline -->
+            <h3 class="section-title" style="margin-bottom: var(--space-lg);">Inline Loading</h3>
+            <div style="margin-bottom: var(--space-xl);">
+                <div class="loading-inline">
+                    <div class="spinner spinner-sm"></div>
+                    <span>Loading game data...</span>
+                </div>
+            </div>
+
+            <!-- Loading Overlay Demo -->
+            <h3 class="section-title" style="margin-bottom: var(--space-lg);">Loading Overlay</h3>
+            <div style="position: relative; height: 200px; border: 2px solid var(--color-border-dashed); margin-bottom: var(--space-xl);">
+                <div style="padding: var(--space-lg); color: var(--color-text-light);">
+                    <p>Content behind the loading overlay...</p>
+                    <p>Season records, statistics, and game data.</p>
+                </div>
+                <div class="loading-overlay active">
+                    <div class="spinner spinner-lg"></div>
+                    <div class="loading-text">Loading stats...</div>
+                </div>
+            </div>
+
+            <!-- Skeleton Loaders -->
+            <h3 class="section-title" style="margin-bottom: var(--space-lg);">Skeleton Loaders</h3>
+            <div style="max-width: 400px;">
+                <div class="skeleton skeleton-heading"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================================
+     SECTION T: TOASTS / NOTIFICATIONS
+     Temporary messages for user feedback and alerts.
+     ===================================================================== -->
+<div class="template-divider">T. Toasts &amp; Notifications</div>
+
+<div class="container">
+    <div class="catalog-card">
+        <div class="card-header">
+            <div class="card-title">Toasts &amp; Notifications</div>
+            <div class="card-subtitle">Temporary messages for user feedback and alerts</div>
+        </div>
+        <div class="card-body">
+
+            <!-- Live Demo Buttons -->
+            <div class="button-group" style="margin-bottom: var(--space-xl);">
+                <button class="btn btn-primary" onclick="showDemoToast('success')">Success Toast</button>
+                <button class="btn btn-secondary" onclick="showDemoToast('error')">Error Toast</button>
+                <button class="btn btn-secondary" onclick="showDemoToast('warning')">Warning Toast</button>
+                <button class="btn btn-secondary" onclick="showDemoToast('info')">Info Toast</button>
+            </div>
+
+            <!-- Inline Toast Previews (always visible) -->
+            <h3 class="section-title" style="margin-bottom: var(--space-lg);">Toast Variants</h3>
+            <div style="display: flex; flex-direction: column; gap: var(--space-md); max-width: 380px;">
+                <div class="toast toast-success active" style="position: static; transform: none; opacity: 1;">
+                    <div class="toast-header">
+                        <span>&#10003; Success</span>
+                    </div>
+                    <div class="toast-body">Game data imported successfully. 10 records added.</div>
+                    <div class="toast-progress"><div class="toast-progress-bar" style="animation: none; transform: scaleX(0.7);"></div></div>
+                </div>
+
+                <div class="toast toast-error active" style="position: static; transform: none; opacity: 1;">
+                    <div class="toast-header">
+                        <span>&#10005; Error</span>
+                    </div>
+                    <div class="toast-body">Failed to load season data. Please try again.</div>
+                    <div class="toast-progress"><div class="toast-progress-bar" style="animation: none; transform: scaleX(0.4);"></div></div>
+                </div>
+
+                <div class="toast toast-warning active" style="position: static; transform: none; opacity: 1;">
+                    <div class="toast-header">
+                        <span>&#9888; Warning</span>
+                    </div>
+                    <div class="toast-body">Some game scores may be unverified.</div>
+                </div>
+
+                <div class="toast toast-info active" style="position: static; transform: none; opacity: 1;">
+                    <div class="toast-header">
+                        <span>&#8505; Notice</span>
+                    </div>
+                    <div class="toast-body">New season data available for 2026.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Toast Container for Live Demo (fixed position) -->
+<div class="toast-container" id="demoToastContainer"></div>
+
+
+<!-- =====================================================================
+     FOOTER VARIANTS
+     ===================================================================== -->
+<div class="template-divider">Footer Variants</div>
+
+<!-- Light Footer (home page style) -->
+<div class="container">
+    <footer>
+        HIGH SCHOOL WINS &bull; SPORTS ARCHIVE COLLECTION
+    </footer>
+</div>
+
+<!-- Dark Footer (profile / game log page style) -->
+<footer class="footer-dark">
+    <p>&copy; 2026 High School Wins - Iowa High School Football Archive</p>
+</footer>
+
+
+<!-- =====================================================================
+     DEMO CHART INITIALIZATION
+     ===================================================================== -->
+<script>
+    // Demo chart for the template
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('demoChart');
+        if (ctx) {
+            new Chart(ctx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Ridge View Raptors',
+                        data: [{x: 2025, y: 2}],
+                        borderColor: '#FF8C00',
+                        backgroundColor: '#FF8C00',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false,
+                            labels: {
+                                font: {
+                                    family: "'Courier New', monospace",
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Cumulative Win Differential',
+                                font: {
+                                    family: "'Courier New', monospace",
+                                    size: 12
+                                }
+                            },
+                            grid: {
+                                color: function(context) {
+                                    return context.tick.value === 0 ? '#000000' : 'rgba(0, 0, 0, 0.1)';
+                                },
+                                lineWidth: function(context) {
+                                    return context.tick.value === 0 ? 2 : 1;
+                                }
+                            }
+                        },
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            min: 2024,
+                            max: 2025.5,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function(value) {
+                                    return Number.isInteger(value) ? value : '';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Season',
+                                font: {
+                                    family: "'Courier New', monospace",
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+
+    // Sport dropdown: dynamic left/right positioning + close on outside click
+    function positionSportMenu(dropdown) {
+        var menu = dropdown.querySelector('.sport-menu');
+        if (!menu) return;
+        // Reset to default (right-aligned) first
+        menu.classList.remove('open-left');
+        // Measure after a frame so display:block has taken effect
+        requestAnimationFrame(function() {
+            var rect = menu.getBoundingClientRect();
+            var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+            // If menu overflows the right edge, switch to left-aligned
+            if (rect.right > viewportWidth - 8) {
+                menu.classList.add('open-left');
+                // Re-check: if it now overflows the left edge, reset
+                var rectLeft = menu.getBoundingClientRect();
+                if (rectLeft.left < 8) {
+                    menu.classList.remove('open-left');
+                }
+            }
+        });
+    }
+
+    // Hook into all sport-dropdown toggles
+    document.querySelectorAll('.sport-dropdown .sport-trigger').forEach(function(trigger) {
+        trigger.addEventListener('click', function(e) {
+            var dropdown = trigger.closest('.sport-dropdown');
+            dropdown.classList.toggle('open');
+            if (dropdown.classList.contains('open')) {
+                positionSportMenu(dropdown);
+            }
+        });
+    });
+
+    // Re-position on window resize while open
+    window.addEventListener('resize', function() {
+        document.querySelectorAll('.sport-dropdown.open').forEach(positionSportMenu);
+    });
+
+    // Close sport dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        document.querySelectorAll('.sport-dropdown.open').forEach(function(dropdown) {
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('open');
+            }
+        });
+    });
+
+    // Table scroll indicator — hide shadow when scrolled to end
+    document.querySelectorAll('.table-responsive').forEach(function(wrapper) {
+        wrapper.addEventListener('scroll', function() {
+            var atEnd = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 2;
+            wrapper.classList.toggle('scrolled-end', atEnd);
+        });
+    });
+
+    // Demo toast functionality
+    window.showDemoToast = function(type) {
+        var container = document.getElementById('demoToastContainer');
+        var messages = {
+            success: { icon: '&#10003;', label: 'Success', text: 'Game data imported successfully.' },
+            error:   { icon: '&#10005;', label: 'Error', text: 'Failed to load season data.' },
+            warning: { icon: '&#9888;', label: 'Warning', text: 'Some scores may be unverified.' },
+            info:    { icon: '&#8505;', label: 'Notice', text: 'New data available for 2026.' }
+        };
+        var msg = messages[type] || messages.info;
+        var toast = document.createElement('div');
+        toast.className = 'toast toast-' + type;
+        toast.innerHTML =
+            '<div class="toast-header"><span>' + msg.icon + ' ' + msg.label + '</span>' +
+            '<button class="toast-close" onclick="this.closest(\'.toast\').remove()">&times;</button></div>' +
+            '<div class="toast-body">' + msg.text + '</div>' +
+            '<div class="toast-progress"><div class="toast-progress-bar"></div></div>';
+        container.appendChild(toast);
+        // Trigger reflow then animate in
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                toast.classList.add('active');
+            });
+        });
+        // Auto-dismiss after 5s
+        setTimeout(function() {
+            toast.classList.remove('active');
+            setTimeout(function() { toast.remove(); }, 300);
+        }, 5000);
+    };
+</script>
+
+</body>
+</html>
