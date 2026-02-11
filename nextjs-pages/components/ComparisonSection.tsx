@@ -13,32 +13,40 @@ export function ComparisonHeader({ leftTeam, rightTeam, leftRecord, rightRecord 
     <div className="comparison-header active">
       <div className="comparison-split">
         <div className="comparison-team left">
-          <TeamLogo team={leftTeam} size="lg" />
-          <div className="team-colors" style={{ justifyContent: 'center' }}>
-            <div className="color-box" style={{ backgroundColor: leftTeam.colors.primary }} />
-            <div className="color-box" style={{ backgroundColor: leftTeam.colors.secondary }} />
-            <div className="color-box" style={{ backgroundColor: leftTeam.colors.tertiary }} />
+          <div className="comparison-team-visual">
+            <TeamLogo team={leftTeam} size="lg" />
+            <div className="team-colors" style={{ justifyContent: 'center' }}>
+              <div className="color-box" style={{ backgroundColor: leftTeam.colors.primary }} />
+              <div className="color-box" style={{ backgroundColor: leftTeam.colors.secondary }} />
+              <div className="color-box" style={{ backgroundColor: leftTeam.colors.tertiary }} />
+            </div>
           </div>
-          <h1 className="comparison-headline" style={{ color: leftTeam.colors.primary }}>
-            {leftTeam.name}
-          </h1>
-          <h2 className="comparison-mascot">{leftTeam.mascot}</h2>
-          <p className="comparison-subheadline">{leftTeam.sport}</p>
-          <div className="comparison-record">ALL-TIME: {leftRecord}</div>
+          <div className="comparison-team-info">
+            <h1 className="comparison-headline" style={{ color: leftTeam.colors.primary }}>
+              {leftTeam.name}
+            </h1>
+            <h2 className="comparison-mascot">{leftTeam.mascot}</h2>
+            <p className="comparison-subheadline">{leftTeam.sport}</p>
+            <div className="comparison-record">ALL-TIME: {leftRecord}</div>
+          </div>
         </div>
         <div className="comparison-team right">
-          <TeamLogo team={rightTeam} size="lg" />
-          <div className="team-colors" style={{ justifyContent: 'center' }}>
-            <div className="color-box" style={{ backgroundColor: rightTeam.colors.primary }} />
-            <div className="color-box" style={{ backgroundColor: rightTeam.colors.secondary }} />
-            <div className="color-box" style={{ backgroundColor: rightTeam.colors.tertiary }} />
+          <div className="comparison-team-visual">
+            <TeamLogo team={rightTeam} size="lg" />
+            <div className="team-colors" style={{ justifyContent: 'center' }}>
+              <div className="color-box" style={{ backgroundColor: rightTeam.colors.primary }} />
+              <div className="color-box" style={{ backgroundColor: rightTeam.colors.secondary }} />
+              <div className="color-box" style={{ backgroundColor: rightTeam.colors.tertiary }} />
+            </div>
           </div>
-          <h1 className="comparison-headline" style={{ color: rightTeam.colors.primary }}>
-            {rightTeam.name}
-          </h1>
-          <h2 className="comparison-mascot">{rightTeam.mascot}</h2>
-          <p className="comparison-subheadline">{rightTeam.sport}</p>
-          <div className="comparison-record">ALL-TIME: {rightRecord}</div>
+          <div className="comparison-team-info">
+            <h1 className="comparison-headline" style={{ color: rightTeam.colors.primary }}>
+              {rightTeam.name}
+            </h1>
+            <h2 className="comparison-mascot">{rightTeam.mascot}</h2>
+            <p className="comparison-subheadline">{rightTeam.sport}</p>
+            <div className="comparison-record">ALL-TIME: {rightRecord}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -186,11 +194,10 @@ export function HeadToHeadSection({
       <h3 className="section-title">III. Head to Head</h3>
       <div className="h2h-matchups-note">&#9733; Total Match-ups = {totalGames} &#9733;</div>
 
-      <div className="h2h-stats-columns">
-        <div className="h2h-stats-column left">
-          {statRows.map((row, i) => (
+      {statRows.map((row, i) => (
+        <div className="h2h-stat-row" key={i}>
+          <div className="h2h-stat-cell left">
             <div
-              key={i}
               className={`h2h-card ${row.leftVal > row.rightVal ? 'winner' : ''}`}
               style={row.leftVal > row.rightVal ? { borderLeftColor: leftColor } : undefined}
             >
@@ -199,13 +206,11 @@ export function HeadToHeadSection({
                 {row.label === 'Largest Victory' && leftLargest === null ? '--' : row.leftVal}
               </div>
               {row.leftNote && <div className="h2h-card-note">{row.leftNote}</div>}
+              {!row.leftNote && <div className="h2h-card-note">&nbsp;</div>}
             </div>
-          ))}
-        </div>
-        <div className="h2h-stats-column right">
-          {statRows.map((row, i) => (
+          </div>
+          <div className="h2h-stat-cell right">
             <div
-              key={i}
               className={`h2h-card ${row.rightVal > row.leftVal ? 'winner' : ''}`}
               style={row.rightVal > row.leftVal ? { borderLeftColor: rightColor } : undefined}
             >
@@ -214,10 +219,11 @@ export function HeadToHeadSection({
                 {row.label === 'Largest Victory' && rightLargest === null ? '--' : row.rightVal}
               </div>
               {row.rightNote && <div className="h2h-card-note">{row.rightNote}</div>}
+              {!row.rightNote && <div className="h2h-card-note">&nbsp;</div>}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+      ))}
 
       <div className="head-to-head-container table-responsive">
         <table>

@@ -238,55 +238,34 @@ export default function TeamProfileClient({ teamId }: TeamProfileClientProps) {
             ]}
           />
 
-          {/* Section I: Comparison Chart (comparison mode only) */}
-          {isCompareMode && (
-            <div className="comparison-chart-section">
-              <WinDifferentialChart
-                title="Comparison Chart – Win Differential"
-                subtitle="How teams compare by win differential over time"
-                datasets={[
-                  {
-                    label: `${team.name}`,
-                    data: winDiffData.map((d) => ({
-                      season: d.season,
-                      differential: d.differential,
-                      record: '6-4',
-                    })),
-                    color: team.colors.primary,
-                  },
-                  {
-                    label: `${compareTeam!.name}`,
-                    data: [{ season: 2025, differential: 1, record: '1-0' }],
-                    color: compareTeam!.colors.primary === '#000000' ? '#333333' : compareTeam!.colors.primary,
-                  },
-                ]}
-              />
-            </div>
-          )}
         </div>
 
-        {/* Section J: Season-by-Season Table */}
-        <div className="catalog-card">
-          <div className="table-section">
-            <div className="section-header-with-filters">
-              <h3 className="section-title">III. Season-by-Season Index</h3>
-              <Link href={`/team/${teamId}/gamelog`} className="game-log-button">
-                View All Time Game Log
-              </Link>
+        {/* Section J: Season-by-Season Table (hidden in comparison mode) */}
+        {!isCompareMode && (
+          <div className="catalog-card">
+            <div className="table-section">
+              <div className="section-header-with-filters">
+                <h3 className="section-title">III. Season-by-Season Index</h3>
+                <Link href={`/team/${teamId}/gamelog`} className="game-log-button">
+                  View All Time Game Log
+                </Link>
+              </div>
+              <SeasonTable seasons={RIDGE_VIEW_SEASONS} />
             </div>
-            <SeasonTable seasons={RIDGE_VIEW_SEASONS} />
           </div>
-        </div>
+        )}
 
-        {/* Section K: Opponent Table */}
-        <div className="catalog-card">
-          <div className="table-section">
-            <div className="section-header-with-filters">
-              <h3 className="section-title">IV. All-Time Opponent Index</h3>
+        {/* Section K: Opponent Table (hidden in comparison mode) */}
+        {!isCompareMode && (
+          <div className="catalog-card">
+            <div className="table-section">
+              <div className="section-header-with-filters">
+                <h3 className="section-title">IV. All-Time Opponent Index</h3>
+              </div>
+              <OpponentTable opponents={RIDGE_VIEW_OPPONENTS} />
             </div>
-            <OpponentTable opponents={RIDGE_VIEW_OPPONENTS} />
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

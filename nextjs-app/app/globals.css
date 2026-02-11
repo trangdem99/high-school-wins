@@ -823,6 +823,39 @@ footer.footer-dark {
   width: 50%;
   text-align: center;
   padding: 0 var(--space-md);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.comparison-team-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.comparison-team-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Left team: visual left, info right -> text align left */
+.comparison-team.left .comparison-team-info {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Right team: visual right, info left -> reverse row, text align right */
+.comparison-team.right {
+  flex-direction: row-reverse;
+}
+
+.comparison-team.right .comparison-team-info {
+  align-items: flex-end;
+  text-align: right;
 }
 
 /* FIX H: Single continuous vertical divider line between teams */
@@ -1159,11 +1192,13 @@ tbody tr:hover {
   display: flex;
   gap: 0;
   margin-bottom: var(--space-lg);
+  align-items: stretch;
 }
 
 .h2h-card-container {
   flex: 1;
   width: 50%;
+  display: flex;
 }
 
 /* FIX H: Single continuous vertical line between H2H cards */
@@ -1176,14 +1211,54 @@ tbody tr:hover {
   padding-left: var(--space-xl);
 }
 
+/* H2H row-based layout — guarantees equal card heights */
+.h2h-stat-row {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.h2h-stat-cell {
+  flex: 1;
+  width: 50%;
+  display: flex;
+}
+
+.h2h-stat-cell.left {
+  border-right: var(--border-thick);
+  padding-right: var(--space-xl);
+}
+
+.h2h-stat-cell.right {
+  padding-left: var(--space-xl);
+}
+
+.h2h-stat-cell.left .h2h-card.winner {
+  border-left-color: var(--stat-value-color);
+}
+
+.h2h-stat-cell.right .h2h-card.winner {
+  border-left-color: var(--comparison-stat-value-color);
+}
+
+.h2h-stat-cell.left .h2h-card-value {
+  color: var(--stat-value-color);
+}
+
+.h2h-stat-cell.right .h2h-card-value {
+  color: var(--comparison-stat-value-color);
+}
+
 /* FIX H: Equal height for all stat rows */
 .h2h-card {
   border-bottom: 2px solid #000;
   padding-bottom: var(--space-sm);
+  padding-top: var(--space-sm);
   min-height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex: 1;
 }
 
 .h2h-card.winner {
@@ -1426,6 +1501,8 @@ tbody tr:hover {
   .stats-section.comparison-mode .stats-container.right { padding-left: var(--space-md); }
   .h2h-card-container.left { padding-right: var(--space-md); }
   .h2h-card-container.right { padding-left: var(--space-md); }
+  .h2h-stat-cell.left { padding-right: var(--space-md); }
+  .h2h-stat-cell.right { padding-left: var(--space-md); }
 
   .section-header-with-filters {
     flex-direction: column;
@@ -1481,6 +1558,8 @@ tbody tr:hover {
 
   .h2h-card-container.left { padding-right: var(--space-sm); }
   .h2h-card-container.right { padding-left: var(--space-sm); }
+  .h2h-stat-cell.left { padding-right: var(--space-sm); }
+  .h2h-stat-cell.right { padding-left: var(--space-sm); }
   .h2h-card-value { font-size: 1.5rem; }
   .h2h-card-label { font-size: 0.65rem; }
 
