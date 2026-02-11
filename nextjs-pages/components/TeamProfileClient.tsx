@@ -186,25 +186,7 @@ export default function TeamProfileClient({ teamId }: TeamProfileClientProps) {
           )}
         </div>
 
-        {/* Section H: Head-to-Head (comparison mode only) */}
-        {isCompareMode && (
-          <div className="catalog-card">
-            <HeadToHeadSection
-              leftTeam={team}
-              rightTeam={compareTeam!}
-              games={HEAD_TO_HEAD_GAMES}
-              leftWins={0}
-              rightWins={1}
-              leftStreak={0}
-              rightStreak={1}
-              rightStreakActive
-              leftLargest={null}
-              rightLargest={17}
-            />
-          </div>
-        )}
-
-        {/* Section I: Chart */}
+        {/* Section II: Chart */}
         <div className="catalog-card">
           <WinDifferentialChart
             title="II. Cumulative Win Differential"
@@ -231,7 +213,7 @@ export default function TeamProfileClient({ teamId }: TeamProfileClientProps) {
             ]}
           />
 
-          {/* Section I: Comparison Chart (comparison mode only) */}
+          {/* Comparison Chart (comparison mode only) */}
           {isCompareMode && (
             <div className="comparison-chart-section">
               <WinDifferentialChart
@@ -258,11 +240,29 @@ export default function TeamProfileClient({ teamId }: TeamProfileClientProps) {
           )}
         </div>
 
-        {/* Section J: Season-by-Season Table */}
+        {/* Section III: Head-to-Head (comparison mode) / Season-by-Season */}
+        {isCompareMode ? (
+          <div className="catalog-card">
+            <HeadToHeadSection
+              leftTeam={team}
+              rightTeam={compareTeam!}
+              games={HEAD_TO_HEAD_GAMES}
+              leftWins={0}
+              rightWins={1}
+              leftStreak={0}
+              rightStreak={1}
+              rightStreakActive
+              leftLargest={null}
+              rightLargest={17}
+            />
+          </div>
+        ) : null}
+
+        {/* Section III/IV: Season-by-Season Table */}
         <div className="catalog-card">
           <div className="table-section">
             <div className="section-header-with-filters">
-              <h3 className="section-title">III. Season-by-Season Index</h3>
+              <h3 className="section-title">{isCompareMode ? 'IV' : 'III'}. Season-by-Season Index</h3>
               <Link href={`/team/${teamId}/gamelog`} className="game-log-button">
                 View All Time Game Log
               </Link>
@@ -271,15 +271,17 @@ export default function TeamProfileClient({ teamId }: TeamProfileClientProps) {
           </div>
         </div>
 
-        {/* Section K: Opponent Table */}
-        <div className="catalog-card">
-          <div className="table-section">
-            <div className="section-header-with-filters">
-              <h3 className="section-title">IV. All-Time Opponent Index</h3>
+        {/* Section IV: Opponent Table (hidden in comparison mode) */}
+        {!isCompareMode && (
+          <div className="catalog-card">
+            <div className="table-section">
+              <div className="section-header-with-filters">
+                <h3 className="section-title">IV. All-Time Opponent Index</h3>
+              </div>
+              <OpponentTable opponents={RIDGE_VIEW_OPPONENTS} />
             </div>
-            <OpponentTable opponents={RIDGE_VIEW_OPPONENTS} />
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

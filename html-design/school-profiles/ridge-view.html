@@ -1,0 +1,2709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ridge View Raptors - High School Wins</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: #e8e3d3;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 4px solid #000;
+        }
+
+        .site-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .site-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .site-title a:hover {
+            opacity: 0.8;
+        }
+
+        .site-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Catalog Card */
+        .catalog-card {
+            background: white;
+            border: 3px solid #000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* Classification Bar */
+        .classification-bar {
+            background-color: #f9f3e8;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 3px solid #000;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .catalog-number {
+            position: absolute;
+            right: 1.5rem;
+            top: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            border-bottom: 1px dashed #1a1a1a;
+        }
+
+        .breadcrumb-link:hover {
+            color: #000;
+            border-bottom: 1px solid #000;
+        }
+
+        /* Filing Bar */
+        .filing-bar {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 3px solid #000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+        }
+
+        .filing-items-left {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filing-item {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filing-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filing-value {
+            color: #666;
+        }
+
+        /* Sport Dropdown */
+        .sport-dropdown {
+            position: relative;
+        }
+
+        .sport-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            border: 1px dashed transparent;
+            transition: border-color 0.15s ease;
+        }
+
+        .sport-trigger:hover {
+            border-color: #999;
+        }
+
+        .sport-trigger .filing-value {
+            color: #1a1a1a;
+        }
+
+        .sport-chevron {
+            font-size: 0.6rem;
+            color: #888;
+            transition: transform 0.2s ease;
+        }
+
+        .sport-dropdown.open .sport-chevron {
+            transform: rotate(180deg);
+        }
+
+        .sport-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: white;
+            border: 2px solid #000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 100;
+            min-width: 240px;
+        }
+
+        .sport-dropdown.open .sport-menu {
+            display: block;
+        }
+
+        .sport-menu-columns {
+            display: flex;
+        }
+
+        .sport-column {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .sport-column:first-child {
+            border-right: 1px solid #ddd;
+        }
+
+        .sport-column-header {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            font-size: 0.7rem;
+            color: #1a1a1a;
+            text-decoration: underline;
+        }
+
+        .sport-column ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sport-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sport-column a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            transition: color 0.15s ease;
+        }
+
+        .sport-column a:hover {
+            color: #1a1a1a;
+        }
+
+        .sport-column a.active {
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .sport-column a.disabled {
+            color: #ccc;
+            pointer-events: none;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 2rem 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #000;
+            position: relative;
+        }
+
+        .fixed-colors-left,
+        .fixed-colors-right {
+            position: absolute;
+            top: 165px;
+            display: none;
+            gap: 0.375rem;
+            justify-content: center;
+            width: 120px;
+        }
+
+        .fixed-colors-left {
+            left: 1.5rem;
+        }
+
+        .fixed-colors-right {
+            right: 1.5rem;
+        }
+
+        .fixed-colors-left.active,
+        .fixed-colors-right.active {
+            display: flex;
+        }
+
+        .fixed-colors-left .color-box,
+        .fixed-colors-right .color-box {
+            width: 26px;
+            height: 26px;
+        }
+
+        .team-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--team-primary);
+            border: 5px solid var(--team-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--team-tertiary);
+            position: absolute;
+            left: 1.5rem;
+            top: 2rem;
+        }
+
+        .compare-button {
+            position: absolute;
+            right: 1.5rem;
+            top: 2rem;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: white;
+            border: 5px dashed #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 1rem;
+            color: #1a1a1a;
+        }
+
+        .compare-button:hover {
+            background: #f9f3e8;
+        }
+
+        .header-text {
+            margin-top: -5px;
+        }
+
+        .headline {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 0.55rem;
+            line-height: 1;
+        }
+
+        .mascot-name {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 0;
+            line-height: 1;
+        }
+
+        .subheadline {
+            font-size: 1rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        /* Team Colors */
+        .team-colors {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .color-box {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #000;
+        }
+
+        .all-time-record {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-top: 0;
+        }
+
+        /* Comparison Header */
+        .comparison-header {
+            display: none;
+            padding: 2rem 2rem 1.5rem;
+            border-bottom: 3px solid #000;
+        }
+
+        .comparison-header.active {
+            display: block;
+        }
+
+        .comparison-split {
+            display: flex;
+            width: 100%;
+            margin-top: -40px;
+            align-items: flex-start;
+        }
+
+        .comparison-team {
+            flex: 1;
+            width: 50%;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .comparison-team.left {
+            border-right: 3px solid #000;
+        }
+
+        .comparison-headline {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 0.1rem;
+        }
+
+        .comparison-mascot {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .comparison-subheadline {
+            font-size: 1rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .comparison-record {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 2rem;
+            border-bottom: 3px solid #000;
+        }
+
+        .rank-note {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 0.5rem;
+            background: #f9f3e8;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stats-columns {
+            display: block;
+        }
+
+        .stats-section.comparison-mode .stats-columns {
+            display: flex;
+            gap: 0;
+        }
+
+        .stats-section.comparison-mode .stats-container {
+            flex: 1;
+            width: 50%;
+        }
+
+        .stats-section.comparison-mode .stats-container.left {
+            border-right: 3px solid #000;
+            padding-right: 2rem;
+        }
+
+        .stats-section.comparison-mode .stats-container.right {
+            padding-left: 2rem;
+        }
+
+        .stats-section.comparison-mode .stats-grid {
+            grid-template-columns: 1fr;
+            width: 100%;
+        }
+
+        /* Winner Accent Bar - Comparison Mode */
+        .stats-section.comparison-mode .stat-item.winner {
+            border-left: 4px solid var(--stat-value-color);
+            padding-left: 0.75rem;
+            margin-left: -0.75rem;
+        }
+
+        .stats-section.comparison-mode .stats-container.right .stat-item.winner {
+            border-left-color: var(--comparison-stat-value-color);
+        }
+
+        /* Comparison team stat values use different color */
+        .stats-container.right .stat-value {
+            color: var(--comparison-stat-value-color, var(--stat-value-color));
+        }
+
+        .stat-item {
+            border-bottom: 2px solid #000;
+            padding-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--stat-value-color, var(--team-primary));
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-rank-badge {
+            background: #f9f3e8;
+            border: 1px solid #ccc;
+            padding: 0.35rem 0.75rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            font-weight: normal;
+            color: #666;
+        }
+
+        .rank-position {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .stat-record {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 400;
+            margin-top: 0.25rem;
+            min-height: 1.1rem;
+        }
+
+        .stat-note {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 0.25rem;
+            min-height: 1.1rem;
+        }
+
+        /* Win Differential Chart */
+        .chart-section {
+            padding: 2rem;
+            border-bottom: 3px solid #000;
+        }
+
+        .section-title {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            text-align: left;
+            border-bottom: 2px solid #000;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 1.5rem;
+            border: 2px solid #000;
+            position: relative;
+            height: 400px;
+        }
+
+        #chartTooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 3px;
+            padding: 10px;
+            pointer-events: none;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            z-index: 1000;
+            display: none;
+            min-width: 200px;
+        }
+
+        .tooltip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .tooltip-color-box {
+            width: 16px;
+            height: 16px;
+            border: 1px solid white;
+        }
+
+        .tooltip-body {
+            line-height: 1.6;
+        }
+
+        #teamDropdown {
+            position: absolute;
+            top: 2rem;
+            right: calc(1.5rem + 120px + 1rem);
+            background: white;
+            border: 3px solid #000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            width: 550px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        #teamDropdown.active {
+            display: block;
+        }
+
+        .dropdown-search-filters {
+            padding: 1rem;
+            border-bottom: 2px solid #000;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .dropdown-search-filters input {
+            flex: 1;
+            padding: 0.5rem;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #ccc;
+            font-size: 0.85rem;
+            background: #f9f3e8;
+        }
+
+        .dropdown-search-filters select {
+            padding: 0.5rem;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #ccc;
+            font-size: 0.85rem;
+            background: #f9f3e8;
+            min-width: 140px;
+        }
+
+        .dropdown-team {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .dropdown-team:hover {
+            background: #f9f3e8;
+        }
+
+        .dropdown-team-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Georgia, serif;
+            font-size: 1.75rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .dropdown-team-info {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .dropdown-team-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-team-mascot {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Tables */
+        .table-section {
+            padding: 2rem;
+            border-bottom: 3px solid #000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #000;
+            margin-top: 1rem;
+        }
+
+        thead {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        th {
+            padding: 0.75rem;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            border: 1px solid #000;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        th:hover {
+            background: #2a2a2a;
+        }
+
+        th.sortable::after {
+            content: ' ↕';
+            opacity: 0.3;
+            font-size: 0.7rem;
+        }
+
+        th.sort-asc::after {
+            content: ' ▲';
+            opacity: 1;
+        }
+
+        th.sort-desc::after {
+            content: ' ▼';
+            opacity: 1;
+        }
+
+        td {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9f6f0;
+        }
+
+        tbody tr:hover {
+            background: #f9f3e8;
+        }
+
+        .table-note {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #666;
+            padding: 1rem;
+            background: #f9f3e8;
+            border: 2px solid #ccc;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Section Header with Filters */
+        .section-header-with-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-header-with-filters .section-title {
+            margin-bottom: 0;
+        }
+
+        /* Filter Controls */
+        .filter-controls {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .filter-input,
+        .filter-select {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            padding: 0.5rem 0.75rem;
+            border: 2px solid #ccc;
+            background: #f9f3e8;
+            color: #1a1a1a;
+            border-radius: 0;
+        }
+
+        .filter-input {
+            width: 150px;
+        }
+
+        .filter-select {
+            min-width: 140px;
+            cursor: pointer;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: #000;
+            background: white;
+        }
+
+        /* Head to Head Section */
+        .head-to-head-container {
+            max-height: 450px;
+            overflow-y: auto;
+        }
+
+        #headToHeadTable .team-column {
+            width: 25%;
+            text-align: center;
+        }
+
+        #headToHeadTable td.score-cell {
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        #headToHeadTable td.score-cell.winner-left {
+            color: var(--stat-value-color);
+        }
+
+        #headToHeadTable td.score-cell.winner-right {
+            color: var(--comparison-stat-value-color);
+        }
+
+        #headToHeadTable td.score-cell.loser {
+            color: #999;
+        }
+
+        .h2h-matchups-note {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 0.5rem;
+            background: #f9f3e8;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .h2h-wins-cards {
+            display: flex;
+            gap: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .h2h-card-container {
+            flex: 1;
+            width: 50%;
+        }
+
+        .h2h-card-container.left {
+            border-right: 3px solid #000;
+            padding-right: 2rem;
+        }
+
+        .h2h-card-container.right {
+            padding-left: 2rem;
+        }
+
+        .h2h-card {
+            border-bottom: 2px solid #000;
+            padding-bottom: 0.5rem;
+        }
+
+        .h2h-card.winner {
+            border-left: 4px solid;
+            padding-left: 0.75rem;
+            margin-left: -0.75rem;
+        }
+
+        .h2h-card-container.left .h2h-card.winner {
+            border-left-color: var(--stat-value-color);
+        }
+
+        .h2h-card-container.right .h2h-card.winner {
+            border-left-color: var(--comparison-stat-value-color);
+        }
+
+        .h2h-card-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .h2h-card-value {
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .h2h-card-container.left .h2h-card-value {
+            color: var(--stat-value-color);
+        }
+
+        .h2h-card-container.right .h2h-card-value {
+            color: var(--comparison-stat-value-color);
+        }
+
+        .h2h-card-note {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 400;
+            margin-top: 0.25rem;
+            min-height: 1.1rem;
+        }
+
+        /* Game Log Button */
+        .game-log-button {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            background: #1a1a1a;
+            color: white;
+            border: 2px solid #000;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .game-log-button:hover {
+            background: #f9f3e8;
+            color: #1a1a1a;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        /* CSS Variables for Team Colors */
+        :root {
+            --team-primary: #FF8C00;   /* Orange */
+            --team-secondary: #FFD700;  /* Gold */
+            --team-tertiary: #000000;   /* Black */
+        }
+
+        @media (max-width: 768px) {
+            .headline {
+                font-size: 2.5rem;
+            }
+            .mascot-name {
+                font-size: 1.75rem;
+            }
+            .team-logo {
+                width: 80px;
+                height: 80px;
+                font-size: 3rem;
+            }
+            .compare-button {
+                position: static;
+                margin-top: 1rem;
+                width: 100%;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="site-header">
+            <div>
+                <div class="site-title"><a href="../index.html">HIGH SCHOOL WINS</a></div>
+                <div class="site-subtitle">Sports Archive Collection</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Catalog Card -->
+        <div class="catalog-card">
+            <!-- Classification Bar -->
+            <div class="classification-bar">
+                <span>CLASSIFICATION: <a href="iowa-schools.html" class="breadcrumb-link">IOWA</a> &gt; RIDGE VIEW &gt; FOOTBALL</span>
+                <span class="catalog-number">CAT. NO. IA-FTB-WVC-RV</span>
+            </div>
+
+            <!-- Filing Bar -->
+            <div class="filing-bar">
+                <div class="filing-items-left">
+                    <div class="filing-item">
+                        <span class="filing-label">FILED UNDER:</span>
+                        <span class="filing-value">Western Valley Conference</span>
+                    </div>
+                    <div class="filing-item">
+                        <span class="filing-label">LOCATION:</span>
+                        <span class="filing-value">Holstein, Iowa</span>
+                    </div>
+                    <div class="filing-item">
+                        <span class="filing-label">CLASS:</span>
+                        <span class="filing-value">1A</span>
+                    </div>
+                </div>
+                <div class="sport-dropdown" id="sportDropdown">
+                    <div class="sport-trigger" onclick="toggleSportDropdown()">
+                        <span class="filing-label">SPORT:</span>
+                        <span class="filing-value">Football</span>
+                        <span class="sport-chevron">&#9660;</span>
+                    </div>
+                    <div class="sport-menu">
+                        <div class="sport-menu-columns">
+                            <div class="sport-column">
+                                <div class="sport-column-header">Girls</div>
+                                <ul>
+                                    <li><a href="#" class="disabled">Volleyball</a></li>
+                                    <li><a href="#" class="disabled">Basketball</a></li>
+                                    <li><a href="#" class="disabled">Softball</a></li>
+                                </ul>
+                            </div>
+                            <div class="sport-column">
+                                <div class="sport-column-header">Boys</div>
+                                <ul>
+                                    <li><a href="#" class="active">Football</a></li>
+                                    <li><a href="#" class="disabled">Basketball</a></li>
+                                    <li><a href="#" class="disabled">Baseball</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article Header -->
+            <div class="article-header">
+                <div class="team-logo">R</div>
+                <button class="compare-button" onclick="toggleDropdown()">Compare Team</button>
+
+                <!-- Fixed color boxes for comparison mode -->
+                <div class="fixed-colors-left" id="fixedColorsLeft"></div>
+                <div class="fixed-colors-right" id="fixedColorsRight"></div>
+
+                <div id="teamDropdown">
+                    <div class="dropdown-search-filters">
+                        <input type="text" id="teamSearch" placeholder="Search teams..." onkeyup="filterTeams()">
+                        <select id="comparisonConferenceFilter" onchange="filterTeams()">
+                            <option value="">All Conferences</option>
+                        </select>
+                        <select id="comparisonClassFilter" onchange="filterTeams()">
+                            <option value="">All Classes</option>
+                        </select>
+                    </div>
+                    <div id="teamList"></div>
+                </div>
+
+                <div class="header-text">
+                    <h1 class="headline">RIDGE VIEW</h1>
+                    <h2 class="mascot-name">RAPTORS</h2>
+                    <p class="subheadline">Football</p>
+
+                    <div class="team-colors">
+                        <div class="color-box" style="background-color: #FF8C00;"></div>
+                        <div class="color-box" style="background-color: #FFD700;"></div>
+                        <div class="color-box" style="background-color: #000000;"></div>
+                    </div>
+
+                    <div class="all-time-record">ALL-TIME RECORD: 6-4-0</div>
+                </div>
+            </div>
+
+            <!-- Comparison Header (Hidden by default) -->
+            <div class="comparison-header" id="comparisonHeader">
+                <div class="comparison-split">
+                    <!-- Left Team (Main Team) -->
+                    <div class="comparison-team left">
+                        <h1 class="comparison-headline" id="comparisonNameLeft"></h1>
+                        <h2 class="comparison-mascot" id="comparisonMascotLeft"></h2>
+                        <p class="comparison-subheadline">Football</p>
+                        <div class="comparison-record" id="comparisonRecordLeft"></div>
+                    </div>
+
+                    <!-- Right Team (Comparison Team) -->
+                    <div class="comparison-team right">
+                        <h1 class="comparison-headline" id="comparisonNameRight"></h1>
+                        <h2 class="comparison-mascot" id="comparisonMascotRight"></h2>
+                        <p class="comparison-subheadline">Football</p>
+                        <div class="comparison-record" id="comparisonRecordRight"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section" id="statsSection">
+                <h3 class="section-title">I. All-Time Stats</h3>
+                <div class="rank-note">★ Rank = among 17 teams ★</div>
+
+                <div class="stats-columns">
+                    <!-- Main Team Stats (always visible) -->
+                    <div class="stats-container left" id="mainTeamStats">
+                        <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Win/Loss</div>
+                            <div class="stat-value">
+                                .600
+                                <span class="stat-rank-badge">Rank: <span class="rank-position">5th</span></span>
+                            </div>
+                            <div class="stat-record">6-4-0</div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-label">State Titles</div>
+                            <div class="stat-value">
+                                0
+                                <span class="stat-rank-badge">Rank: <span class="rank-position">T-1st</span></span>
+                            </div>
+                            <div class="stat-record">0-0</div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-label">Playoff Appearances</div>
+                            <div class="stat-value">
+                                1
+                                <span class="stat-rank-badge">Rank: <span class="rank-position">T-1st</span></span>
+                            </div>
+                            <div class="stat-note">Postseason qualifications</div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-label">Playoff Record</div>
+                            <div class="stat-value">
+                                .500
+                                <span class="stat-rank-badge">Rank: <span class="rank-position">2nd</span></span>
+                            </div>
+                            <div class="stat-record">1-1</div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-label">District Record</div>
+                            <div class="stat-value">
+                                .800
+                                <span class="stat-rank-badge">Rank: <span class="rank-position">2nd</span></span>
+                            </div>
+                            <div class="stat-record">4-1</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Team Stats (dynamically populated) -->
+                    <div class="stats-container right" id="comparisonTeamStats" style="display: none;">
+                        <div class="stats-grid" id="comparisonStatsGrid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Win Differential Chart -->
+            <div class="chart-section">
+                <h3 class="section-title">II. Cumulative Win Differential</h3>
+                <p class="section-subtitle">Wins - losses. A great way to see program winning trends over time</p>
+                <div class="chart-container">
+                    <canvas id="winDifferentialChart"></canvas>
+                    <div id="chartTooltip"></div>
+                </div>
+            </div>
+
+            <!-- Season-by-Season Table -->
+            <div class="table-section" id="seasonSection">
+                <div class="section-header-with-filters">
+                    <h3 class="section-title">III. Season-by-Season Index</h3>
+                    <a href="ridge-view-game-log.html" class="game-log-button">View All Time Game Log</a>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Season</th>
+                            <th>Record</th>
+                            <th>Win %</th>
+                            <th>Class</th>
+                            <th>Conference</th>
+                            <th>Postseason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2025</td>
+                            <td>6-4</td>
+                            <td>.600</td>
+                            <td>1A</td>
+                            <td>Western Valley</td>
+                            <td>Playoff Round 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- All-Time Opponents Table -->
+            <div class="table-section" id="opponentSection">
+                <div class="section-header-with-filters">
+                    <h3 class="section-title">IV. All-Time Opponent Index</h3>
+                    <div class="filter-controls">
+                        <input type="text" id="opponentSearch" class="filter-input" placeholder="Search">
+                        <select id="conferenceFilter" class="filter-select">
+                            <option value="">All Conferences</option>
+                        </select>
+                        <select id="classFilter" class="filter-select">
+                            <option value="">All Classes</option>
+                        </select>
+                        <select id="stateFilter" class="filter-select" style="display: none;">
+                            <option value="">All States</option>
+                        </select>
+                    </div>
+                </div>
+                <table id="opponentTable">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="opponent">Opponent</th>
+                            <th class="sortable" data-sort="games">Games</th>
+                            <th class="sortable" data-sort="wins">W</th>
+                            <th class="sortable" data-sort="losses">L</th>
+                            <th class="sortable" data-sort="ties">T</th>
+                            <th class="sortable" data-sort="winpct">Win %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-opponent="Alta-Aurelia" data-conference="" data-class="" data-state="Iowa">
+                            <td>Alta-Aurelia</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1.000</td>
+                        </tr>
+                        <tr data-opponent="Hinton" data-conference="" data-class="" data-state="Iowa">
+                            <td>Hinton</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1.000</td>
+                        </tr>
+                        <tr data-opponent="Lawton-Bronson" data-conference="" data-class="" data-state="Iowa">
+                            <td>Lawton-Bronson</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1.000</td>
+                        </tr>
+                        <tr data-opponent="MVAOCOU" data-conference="" data-class="" data-state="Iowa">
+                            <td>MVAOCOU</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1.000</td>
+                        </tr>
+                        <tr data-opponent="South Central Calhoun" data-conference="" data-class="" data-state="Iowa">
+                            <td>South Central Calhoun</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1.000</td>
+                        </tr>
+                        <tr data-opponent="Tri-Center" data-conference="" data-class="" data-state="Iowa">
+                            <td>Tri-Center</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1.000</td>
+                        </tr>
+                        <tr data-opponent="Cherokee Washington" data-conference="" data-class="" data-state="Iowa">
+                            <td>Cherokee Washington</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>.000</td>
+                        </tr>
+                        <tr data-opponent="OABCIG" data-conference="" data-class="" data-state="Iowa">
+                            <td>OABCIG</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>.000</td>
+                        </tr>
+                        <tr data-opponent="South Hardin" data-conference="" data-class="" data-state="Iowa">
+                            <td>South Hardin</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>.000</td>
+                        </tr>
+                        <tr data-opponent="West Lyon" data-conference="" data-class="" data-state="Iowa">
+                            <td>West Lyon</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Head to Head Section (Comparison Mode Only) -->
+            <div class="table-section" id="headToHeadSection" style="display: none;">
+                <h3 class="section-title">III. Head to Head</h3>
+                <div class="h2h-matchups-note" id="h2hMatchupsNote">
+                    <!-- Populated by JavaScript -->
+                </div>
+                <div class="h2h-wins-cards" id="h2hWinsCards">
+                    <div class="h2h-card-container left">
+                        <div class="h2h-card" id="h2hCardWinsLeft">
+                            <div class="h2h-card-label">Wins</div>
+                            <div class="h2h-card-value" id="h2hLeftWins">0</div>
+                        </div>
+                    </div>
+                    <div class="h2h-card-container right">
+                        <div class="h2h-card" id="h2hCardWinsRight">
+                            <div class="h2h-card-label">Wins</div>
+                            <div class="h2h-card-value" id="h2hRightWins">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="h2h-wins-cards">
+                    <div class="h2h-card-container left">
+                        <div class="h2h-card" id="h2hCardStreakLeft">
+                            <div class="h2h-card-label">Longest Win Streak</div>
+                            <div class="h2h-card-value" id="h2hLeftStreak">0</div>
+                            <div class="h2h-card-note" id="h2hLeftStreakNote"></div>
+                        </div>
+                    </div>
+                    <div class="h2h-card-container right">
+                        <div class="h2h-card" id="h2hCardStreakRight">
+                            <div class="h2h-card-label">Longest Win Streak</div>
+                            <div class="h2h-card-value" id="h2hRightStreak">0</div>
+                            <div class="h2h-card-note" id="h2hRightStreakNote"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="h2h-wins-cards">
+                    <div class="h2h-card-container left">
+                        <div class="h2h-card" id="h2hCardVictoryLeft">
+                            <div class="h2h-card-label">Largest Victory</div>
+                            <div class="h2h-card-value" id="h2hLeftVictory">--</div>
+                        </div>
+                    </div>
+                    <div class="h2h-card-container right">
+                        <div class="h2h-card" id="h2hCardVictoryRight">
+                            <div class="h2h-card-label">Largest Victory</div>
+                            <div class="h2h-card-value" id="h2hRightVictory">--</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="head-to-head-container">
+                    <table id="headToHeadTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th class="team-column" id="h2hLeftTeamHeader">Main Team</th>
+                                <th class="team-column" id="h2hRightTeamHeader">Comparison Team</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="headToHeadBody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 High School Wins - Iowa High School Football Archive</p>
+    </footer>
+
+    <script>
+        // Sport Dropdown Toggle
+        function toggleSportDropdown() {
+            const dropdown = document.getElementById('sportDropdown');
+            dropdown.classList.toggle('open');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('sportDropdown');
+            if (dropdown && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('open');
+            }
+        });
+
+        // Contrast/Readability Checker
+        function getRelativeLuminance(r, g, b) {
+            // Convert RGB to relative luminance (WCAG formula)
+            const rsRGB = r / 255;
+            const gsRGB = g / 255;
+            const bsRGB = b / 255;
+
+            const r_linear = rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
+            const g_linear = gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
+            const b_linear = bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
+
+            return 0.2126 * r_linear + 0.7152 * g_linear + 0.0722 * b_linear;
+        }
+
+        function getContrastRatio(color1, color2) {
+            // Calculate contrast ratio between two colors
+            const l1 = getRelativeLuminance(color1.r, color1.g, color1.b);
+            const l2 = getRelativeLuminance(color2.r, color2.g, color2.b);
+
+            const lighter = Math.max(l1, l2);
+            const darker = Math.min(l1, l2);
+
+            return (lighter + 0.05) / (darker + 0.05);
+        }
+
+        function hexToRgb(hex) {
+            // Convert hex color to RGB object
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function hasGoodReadability(colorHex, backgroundHex = '#FFFFFF') {
+            // Check if color has good readability on background
+            // Lowered threshold to 2.2:1 for large bold text (allows more team colors to show)
+            const color = hexToRgb(colorHex);
+            const background = hexToRgb(backgroundHex);
+
+            if (!color || !background) return false;
+
+            const contrastRatio = getContrastRatio(color, background);
+            return contrastRatio >= 2.2; // 2.2:1 threshold for large bold text
+        }
+
+        function determineStatValueColor(colors) {
+            // Apply the readability formula: primary → secondary → tertiary → black
+            const backgroundColor = '#FFFFFF'; // White background in stat cards
+
+            // Rule 1: Try primary color
+            if (hasGoodReadability(colors[0], backgroundColor)) {
+                return colors[0];
+            }
+
+            // Rule 2: Try secondary color
+            if (colors[1] && hasGoodReadability(colors[1], backgroundColor)) {
+                return colors[1];
+            }
+
+            // Rule 3: Try tertiary color (if it exists)
+            if (colors[2] && hasGoodReadability(colors[2], backgroundColor)) {
+                return colors[2];
+            }
+
+            // Rule 4: Default to black
+            return '#000000';
+        }
+
+        function hexToHsl(hex) {
+            // Convert hex to HSL (Hue, Saturation, Lightness)
+            const rgb = hexToRgb(hex);
+            if (!rgb) return null;
+
+            const r = rgb.r / 255;
+            const g = rgb.g / 255;
+            const b = rgb.b / 255;
+
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0; // achromatic
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+
+            return { h: h * 360, s: s * 100, l: l * 100 };
+        }
+
+        function areColorsSimilar(color1Hex, color2Hex) {
+            // Check if two colors are similar based on hue difference
+            const hsl1 = hexToHsl(color1Hex);
+            const hsl2 = hexToHsl(color2Hex);
+
+            if (!hsl1 || !hsl2) return false;
+
+            // Calculate hue difference (accounting for circular nature of hue)
+            let hueDiff = Math.abs(hsl1.h - hsl2.h);
+            if (hueDiff > 180) hueDiff = 360 - hueDiff;
+
+            // Colors are similar if hue difference is less than 35 degrees
+            return hueDiff < 35;
+        }
+
+        function teamHasBlackColor(colors) {
+            // Check if team has black in their color palette
+            return colors.some(color => {
+                const rgb = hexToRgb(color);
+                if (!rgb) return false;
+                // Consider a color "black" if all RGB values are below 40
+                return rgb.r < 40 && rgb.g < 40 && rgb.b < 40;
+            });
+        }
+
+        function determineComparisonColors(mainTeamColors, comparisonTeamColors) {
+            // Determine stat value colors for both teams in comparison mode
+            const backgroundColor = '#FFFFFF';
+
+            // Step 1: Determine main team color using standard formula
+            const mainColor = determineStatValueColor(mainTeamColors);
+
+            // Step 2: Check if comparison team's primary is similar to main team's color
+            const isSimilar = areColorsSimilar(comparisonTeamColors[0], mainColor);
+
+            let comparisonColor;
+
+            if (!isSimilar) {
+                // Not similar - use standard formula for comparison team
+                comparisonColor = determineStatValueColor(comparisonTeamColors);
+            } else {
+                // Similar - skip primary, try secondary/tertiary
+                let foundReadableColor = false;
+
+                // Try secondary
+                if (comparisonTeamColors[1] && hasGoodReadability(comparisonTeamColors[1], backgroundColor)) {
+                    comparisonColor = comparisonTeamColors[1];
+                    foundReadableColor = true;
+                }
+
+                // Try tertiary if secondary didn't work
+                if (!foundReadableColor && comparisonTeamColors[2] && hasGoodReadability(comparisonTeamColors[2], backgroundColor)) {
+                    comparisonColor = comparisonTeamColors[2];
+                    foundReadableColor = true;
+                }
+
+                // Fallback: both secondary and tertiary failed
+                if (!foundReadableColor) {
+                    // Check if main team has black in their colors
+                    if (teamHasBlackColor(mainTeamColors)) {
+                        // Main team switches to black, comparison uses their primary
+                        return {
+                            mainColor: '#000000',
+                            comparisonColor: comparisonTeamColors[0]
+                        };
+                    } else {
+                        // Main keeps their color, comparison uses black
+                        comparisonColor = '#000000';
+                    }
+                }
+            }
+
+            // Edge case: both teams would use black
+            if (mainColor === '#000000' && comparisonColor === '#000000') {
+                return {
+                    mainColor: '#000000',
+                    comparisonColor: '#333333' // Dark gray
+                };
+            }
+
+            return {
+                mainColor: mainColor,
+                comparisonColor: comparisonColor
+            };
+        }
+
+        // Team data for comparison
+        const teamsData = {
+            'ridge-view': {
+                name: 'Ridge View',
+                mascot: 'Raptors',
+                colors: ['#FF8C00', '#FFD700', '#000000'],
+                colorNames: ['ORANGE', 'GOLD', 'BLACK'],
+                conference: 'Western Valley',
+                class: '1A',
+                seasons: [
+                    {year: 2025, wins: 6, losses: 4, ties: 0}
+                ]
+            },
+            'oabcig': {
+                name: 'OABCIG',
+                mascot: 'Falcons',
+                colors: ['#000000', '#C0C0C0', '#800080'],
+                colorNames: ['BLACK', 'SILVER', 'PURPLE'],
+                conference: 'Western Valley',
+                class: '--',
+                seasons: [
+                    {year: 2025, wins: 1, losses: 0, ties: 0}
+                ],
+                stats: {
+                    winLoss: { value: '1.000', record: '1-0-0', rank: 'T-1st' },
+                    stateTitles: { value: '0', record: '0-0', rank: 'T-1st' },
+                    playoffApps: { value: '0', note: 'Postseason qualifications', rank: 'T-4th' },
+                    playoffRecord: { value: '---', record: '---', rank: null },
+                    districtRecord: { value: '---', record: '---', rank: null }
+                }
+            }
+        };
+
+        // Head-to-head game data between teams
+        // Key format: 'team1-vs-team2' (alphabetical order)
+        const headToHeadData = {
+            'oabcig-vs-ridge-view': [
+                {
+                    date: 'Aug 29, 2025',
+                    homeTeam: 'ridge-view',
+                    location: 'Holstein, IA',
+                    score: { 'ridge-view': 7, 'oabcig': 24 },
+                    notes: ''
+                }
+            ]
+        };
+
+        // Helper function to get head-to-head key
+        function getH2HKey(team1, team2) {
+            const teams = [team1, team2].sort();
+            return teams[0] + '-vs-' + teams[1];
+        }
+
+        // Helper function to get head-to-head games
+        function getHeadToHeadGames(team1, team2) {
+            const key = getH2HKey(team1, team2);
+            return headToHeadData[key] || [];
+        }
+
+        // Helper function to get season data by year and team
+        function getSeasonData(teamKey, year) {
+            const team = teamsData[teamKey];
+            return team.seasons.find(s => s.year === year);
+        }
+
+        // Helper function to get team by dataset index
+        function getTeamByDatasetIndex(index) {
+            if (index === 0) return currentTeam;
+            if (index === 1 && comparisonTeam) return comparisonTeam;
+            return null;
+        }
+
+        let chart;
+        let currentTeam = 'ridge-view';
+        let comparisonTeam = null;
+
+        // Initialize chart
+        function initChart() {
+            const ctx = document.getElementById('winDifferentialChart').getContext('2d');
+            const data = calculateChartData();
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: comparisonTeam !== null,
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                pointStyle: 'line',
+                                boxWidth: 40,
+                                font: {
+                                    family: "'Courier New', monospace",
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            mode: 'nearest',
+                            intersect: true,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: 'rgba(255, 255, 255, 0.3)',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: true,
+                            callbacks: {
+                                title: function(context) {
+                                    return ''; // Remove title
+                                },
+                                label: function(context) {
+                                    const teamKey = getTeamByDatasetIndex(context.datasetIndex);
+                                    const year = context.parsed.x;
+                                    const seasonData = getSeasonData(teamKey, year);
+                                    const cumulativeDiff = context.parsed.y;
+
+                                    if (seasonData) {
+                                        const seasonDiff = seasonData.wins - seasonData.losses;
+                                        const diffSign = seasonDiff >= 0 ? '+' : '';
+                                        const cumulativeSign = cumulativeDiff >= 0 ? '+' : '';
+
+                                        return [
+                                            year.toString(),
+                                            'Season record: ' + seasonData.wins + '-' + seasonData.losses + ' (' + diffSign + seasonDiff + ')',
+                                            'Win differential: ' + cumulativeSign + cumulativeDiff
+                                        ];
+                                    }
+                                    return '';
+                                },
+                                labelColor: function(context) {
+                                    const teamKey = getTeamByDatasetIndex(context.datasetIndex);
+                                    const teamData = teamsData[teamKey];
+
+                                    // Use the same color as the chart line (from stat value color formula)
+                                    let color;
+                                    if (context.datasetIndex === 0) {
+                                        // Main team
+                                        if (comparisonTeam) {
+                                            const compColors = determineComparisonColors(teamsData[currentTeam].colors, teamsData[comparisonTeam].colors);
+                                            color = compColors.mainColor;
+                                        } else {
+                                            color = determineStatValueColor(teamData.colors);
+                                        }
+                                    } else {
+                                        // Comparison team
+                                        const compColors = determineComparisonColors(teamsData[currentTeam].colors, teamData.colors);
+                                        color = compColors.comparisonColor;
+                                    }
+
+                                    return {
+                                        borderColor: color,
+                                        backgroundColor: color,
+                                        borderWidth: 2
+                                    };
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Cumulative Win Differential',
+                                font: {
+                                    family: "'Courier New', monospace",
+                                    size: 12
+                                }
+                            },
+                            grid: {
+                                color: function(context) {
+                                    if (context.tick.value === 0) {
+                                        return '#000000';
+                                    }
+                                    return 'rgba(0, 0, 0, 0.1)';
+                                },
+                                lineWidth: function(context) {
+                                    if (context.tick.value === 0) {
+                                        return 2;
+                                    }
+                                    return 1;
+                                }
+                            }
+                        },
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            min: 2024,
+                            max: 2025.5,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function(value) {
+                                    // Only show whole year numbers
+                                    if (Number.isInteger(value)) {
+                                        return value;
+                                    }
+                                    return '';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Season',
+                                font: {
+                                    family: "'Courier New', monospace",
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function calculateChartData() {
+            const datasets = [];
+
+            // Main team data
+            const mainTeamData = teamsData[currentTeam];
+            const mainDifferentials = calculateCumulativeDifferentials(mainTeamData.seasons);
+
+            // Get the color for main team (use stat value color formula)
+            const mainChartColor = determineStatValueColor(mainTeamData.colors);
+
+            datasets.push({
+                label: mainTeamData.name + ' ' + mainTeamData.mascot,
+                data: mainDifferentials.map((d, i) => ({x: mainTeamData.seasons[i].year, y: d})),
+                borderColor: mainChartColor,
+                backgroundColor: mainChartColor,
+                tension: 0.1
+            });
+
+            // Comparison team data
+            if (comparisonTeam && teamsData[comparisonTeam]) {
+                const compTeamData = teamsData[comparisonTeam];
+                const compDifferentials = calculateCumulativeDifferentials(compTeamData.seasons);
+
+                // Get colors using comparison formula (ensures differentiation)
+                const comparisonColors = determineComparisonColors(mainTeamData.colors, compTeamData.colors);
+
+                // Update main team color in case comparison formula changed it
+                datasets[0].borderColor = comparisonColors.mainColor;
+                datasets[0].backgroundColor = comparisonColors.mainColor;
+
+                datasets.push({
+                    label: compTeamData.name + ' ' + compTeamData.mascot,
+                    data: compDifferentials.map((d, i) => ({x: compTeamData.seasons[i].year, y: d})),
+                    borderColor: comparisonColors.comparisonColor,
+                    backgroundColor: comparisonColors.comparisonColor,
+                    tension: 0.1
+                });
+            }
+
+            return { datasets };
+        }
+
+        function calculateCumulativeDifferentials(seasons) {
+            let cumulative = 0;
+            return seasons.map(season => {
+                cumulative += (season.wins - season.losses);
+                return cumulative;
+            });
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('teamDropdown');
+            dropdown.classList.toggle('active');
+            if (dropdown.classList.contains('active')) {
+                populateTeamList();
+            }
+        }
+
+        function populateTeamList() {
+            const teamList = document.getElementById('teamList');
+            const conferenceFilter = document.getElementById('comparisonConferenceFilter');
+            const classFilter = document.getElementById('comparisonClassFilter');
+
+            teamList.innerHTML = '';
+
+            // Collect unique conferences and classes
+            const conferences = new Set();
+            const classes = new Set();
+
+            Object.keys(teamsData).forEach(key => {
+                if (key !== currentTeam) {
+                    const team = teamsData[key];
+                    if (team.conference) conferences.add(team.conference);
+                    if (team.class) classes.add(team.class);
+                }
+            });
+
+            // Populate conference dropdown
+            conferenceFilter.innerHTML = '<option value="">All Conferences</option>';
+            conferences.forEach(conf => {
+                const option = document.createElement('option');
+                option.value = conf;
+                option.textContent = conf;
+                conferenceFilter.appendChild(option);
+            });
+
+            // Populate class dropdown
+            classFilter.innerHTML = '<option value="">All Classes</option>';
+            classes.forEach(cls => {
+                const option = document.createElement('option');
+                option.value = cls;
+                option.textContent = cls;
+                classFilter.appendChild(option);
+            });
+
+            // Create team list items
+            Object.keys(teamsData).forEach(key => {
+                if (key !== currentTeam) {
+                    const team = teamsData[key];
+                    const div = document.createElement('div');
+                    div.className = 'dropdown-team';
+                    div.setAttribute('data-conference', team.conference || '');
+                    div.setAttribute('data-class', team.class || '');
+                    div.setAttribute('data-name', team.name.toLowerCase());
+
+                    // Create logo
+                    const logo = document.createElement('div');
+                    logo.className = 'dropdown-team-logo';
+                    logo.style.backgroundColor = team.colors[0];
+                    logo.style.border = `3px solid ${team.colors[1] || team.colors[0]}`;
+                    logo.style.color = team.colors[1] || '#FFFFFF';
+                    logo.textContent = team.mascot.charAt(0).toUpperCase();
+
+                    // Create team info
+                    const info = document.createElement('div');
+                    info.className = 'dropdown-team-info';
+
+                    const name = document.createElement('div');
+                    name.className = 'dropdown-team-name';
+                    name.textContent = team.name;
+
+                    const mascot = document.createElement('div');
+                    mascot.className = 'dropdown-team-mascot';
+                    mascot.textContent = team.mascot;
+
+                    info.appendChild(name);
+                    info.appendChild(mascot);
+
+                    div.appendChild(logo);
+                    div.appendChild(info);
+
+                    // Enable clicking to select team for comparison
+                    div.onclick = () => selectComparisonTeam(key);
+
+                    teamList.appendChild(div);
+                }
+            });
+        }
+
+        function selectComparisonTeam(teamKey) {
+            comparisonTeam = teamKey;
+            toggleDropdown();
+            updateComparisonView();
+        }
+
+        function populateComparisonStats() {
+            const compTeam = teamsData[comparisonTeam];
+            const comparisonStatsContainer = document.getElementById('comparisonTeamStats');
+            const comparisonStatsGrid = document.getElementById('comparisonStatsGrid');
+
+            // Show comparison stats container
+            comparisonStatsContainer.style.display = 'block';
+
+            // Clear existing stats
+            comparisonStatsGrid.innerHTML = '';
+
+            // Check if team has stats data
+            if (!compTeam.stats) {
+                comparisonStatsGrid.innerHTML = '<div class="stat-note">Stats data not available</div>';
+                return;
+            }
+
+            const stats = compTeam.stats;
+
+            // Create Win/Loss stat
+            const winLossItem = document.createElement('div');
+            winLossItem.className = 'stat-item';
+            winLossItem.innerHTML = `
+                <div class="stat-label">Win/Loss</div>
+                <div class="stat-value">
+                    ${stats.winLoss.value}
+                    ${stats.winLoss.rank ? `<span class="stat-rank-badge">Rank: <span class="rank-position">${stats.winLoss.rank}</span></span>` : ''}
+                </div>
+                <div class="stat-record">${stats.winLoss.record}</div>
+            `;
+            comparisonStatsGrid.appendChild(winLossItem);
+
+            // Create State Titles stat
+            const stateTitlesItem = document.createElement('div');
+            stateTitlesItem.className = 'stat-item';
+            stateTitlesItem.innerHTML = `
+                <div class="stat-label">State Titles</div>
+                <div class="stat-value">
+                    ${stats.stateTitles.value}
+                    ${stats.stateTitles.rank ? `<span class="stat-rank-badge">Rank: <span class="rank-position">${stats.stateTitles.rank}</span></span>` : ''}
+                </div>
+                <div class="stat-record">${stats.stateTitles.record}</div>
+            `;
+            comparisonStatsGrid.appendChild(stateTitlesItem);
+
+            // Create Playoff Appearances stat
+            const playoffAppsItem = document.createElement('div');
+            playoffAppsItem.className = 'stat-item';
+            playoffAppsItem.innerHTML = `
+                <div class="stat-label">Playoff Appearances</div>
+                <div class="stat-value">
+                    ${stats.playoffApps.value}
+                    ${stats.playoffApps.rank ? `<span class="stat-rank-badge">Rank: <span class="rank-position">${stats.playoffApps.rank}</span></span>` : ''}
+                </div>
+                <div class="stat-note">${stats.playoffApps.note ? stats.playoffApps.note : '&nbsp;'}</div>
+            `;
+            comparisonStatsGrid.appendChild(playoffAppsItem);
+
+            // Create Playoff Record stat
+            const playoffRecordItem = document.createElement('div');
+            playoffRecordItem.className = 'stat-item';
+            playoffRecordItem.innerHTML = `
+                <div class="stat-label">Playoff Record</div>
+                <div class="stat-value">
+                    ${stats.playoffRecord.value}
+                    ${stats.playoffRecord.rank ? `<span class="stat-rank-badge">Rank: <span class="rank-position">${stats.playoffRecord.rank}</span></span>` : ''}
+                </div>
+                <div class="stat-record">${stats.playoffRecord.record !== '---' ? stats.playoffRecord.record : '&nbsp;'}</div>
+            `;
+            comparisonStatsGrid.appendChild(playoffRecordItem);
+
+            // Create District Record stat
+            const districtRecordItem = document.createElement('div');
+            districtRecordItem.className = 'stat-item';
+            districtRecordItem.innerHTML = `
+                <div class="stat-label">District Record</div>
+                <div class="stat-value">
+                    ${stats.districtRecord.value}
+                    ${stats.districtRecord.rank ? `<span class="stat-rank-badge">Rank: <span class="rank-position">${stats.districtRecord.rank}</span></span>` : ''}
+                </div>
+                <div class="stat-record">${stats.districtRecord.record !== '---' ? stats.districtRecord.record : '&nbsp;'}</div>
+            `;
+            comparisonStatsGrid.appendChild(districtRecordItem);
+        }
+
+        function populateHeadToHead() {
+            const mainTeam = teamsData[currentTeam];
+            const compTeam = teamsData[comparisonTeam];
+            const games = getHeadToHeadGames(currentTeam, comparisonTeam);
+
+            // Update table headers with team names
+            document.getElementById('h2hLeftTeamHeader').textContent = mainTeam.name;
+            document.getElementById('h2hRightTeamHeader').textContent = compTeam.name;
+
+            // Populate table body
+            const tbody = document.getElementById('headToHeadBody');
+            tbody.innerHTML = '';
+
+            // Calculate series record
+            let mainWins = 0;
+            let compWins = 0;
+            let ties = 0;
+
+            games.forEach(game => {
+                const mainScore = game.score[currentTeam];
+                const compScore = game.score[comparisonTeam];
+
+                // Determine winner
+                let mainWon = mainScore > compScore;
+                let compWon = compScore > mainScore;
+                let isTie = mainScore === compScore;
+
+                if (mainWon) mainWins++;
+                else if (compWon) compWins++;
+                else ties++;
+
+                // Create row
+                const row = document.createElement('tr');
+
+                // Date cell
+                const dateCell = document.createElement('td');
+                dateCell.textContent = game.date;
+                row.appendChild(dateCell);
+
+                // Main team score cell - uses main team color if winner
+                const mainScoreCell = document.createElement('td');
+                mainScoreCell.className = 'score-cell' + (mainWon ? ' winner-left' : ' loser');
+                mainScoreCell.textContent = mainScore;
+                row.appendChild(mainScoreCell);
+
+                // Comp team score cell - uses comparison team color if winner
+                const compScoreCell = document.createElement('td');
+                compScoreCell.className = 'score-cell' + (compWon ? ' winner-right' : ' loser');
+                compScoreCell.textContent = compScore;
+                row.appendChild(compScoreCell);
+
+                // Notes cell - includes location
+                const notesCell = document.createElement('td');
+                const location = game.location || '';
+                const existingNotes = game.notes || '';
+                notesCell.textContent = existingNotes ? location + ' | ' + existingNotes : location;
+                row.appendChild(notesCell);
+
+                tbody.appendChild(row);
+            });
+
+            // Calculate longest win streaks
+            let mainCurrentStreak = 0;
+            let mainLongestStreak = 0;
+            let compCurrentStreak = 0;
+            let compLongestStreak = 0;
+
+            // Calculate largest victories
+            let mainLargestVictory = 0;
+            let compLargestVictory = 0;
+
+            games.forEach(game => {
+                const mainScore = game.score[currentTeam];
+                const compScore = game.score[comparisonTeam];
+                const margin = Math.abs(mainScore - compScore);
+
+                if (mainScore > compScore) {
+                    // Main team won
+                    mainCurrentStreak++;
+                    compCurrentStreak = 0;
+                    if (mainCurrentStreak > mainLongestStreak) {
+                        mainLongestStreak = mainCurrentStreak;
+                    }
+                    if (margin > mainLargestVictory) {
+                        mainLargestVictory = margin;
+                    }
+                } else if (compScore > mainScore) {
+                    // Comp team won
+                    compCurrentStreak++;
+                    mainCurrentStreak = 0;
+                    if (compCurrentStreak > compLongestStreak) {
+                        compLongestStreak = compCurrentStreak;
+                    }
+                    if (margin > compLargestVictory) {
+                        compLargestVictory = margin;
+                    }
+                }
+            });
+
+            // Check if current streak is active (equals longest and > 0)
+            const mainStreakActive = mainCurrentStreak > 0 && mainCurrentStreak === mainLongestStreak;
+            const compStreakActive = compCurrentStreak > 0 && compCurrentStreak === compLongestStreak;
+
+            // Update matchups note
+            const matchupsNote = document.getElementById('h2hMatchupsNote');
+            matchupsNote.textContent = `★ Total Match-ups = ${games.length} ★`;
+
+            // Update wins cards
+            document.getElementById('h2hLeftWins').textContent = mainWins;
+            document.getElementById('h2hRightWins').textContent = compWins;
+
+            // Update streak cards
+            document.getElementById('h2hLeftStreak').textContent = mainLongestStreak;
+            document.getElementById('h2hRightStreak').textContent = compLongestStreak;
+            document.getElementById('h2hLeftStreakNote').textContent = mainStreakActive ? 'Active' : '';
+            document.getElementById('h2hRightStreakNote').textContent = compStreakActive ? 'Active' : '';
+
+            // Update largest victory cards
+            document.getElementById('h2hLeftVictory').textContent = mainLargestVictory > 0 ? mainLargestVictory : '--';
+            document.getElementById('h2hRightVictory').textContent = compLargestVictory > 0 ? compLargestVictory : '--';
+
+            // Add winner accents to cards
+            // Wins
+            const winsLeftCard = document.getElementById('h2hCardWinsLeft');
+            const winsRightCard = document.getElementById('h2hCardWinsRight');
+            winsLeftCard.classList.remove('winner');
+            winsRightCard.classList.remove('winner');
+            if (mainWins > compWins) {
+                winsLeftCard.classList.add('winner');
+            } else if (compWins > mainWins) {
+                winsRightCard.classList.add('winner');
+            }
+
+            // Longest Win Streak
+            const streakLeftCard = document.getElementById('h2hCardStreakLeft');
+            const streakRightCard = document.getElementById('h2hCardStreakRight');
+            streakLeftCard.classList.remove('winner');
+            streakRightCard.classList.remove('winner');
+            if (mainLongestStreak > compLongestStreak) {
+                streakLeftCard.classList.add('winner');
+            } else if (compLongestStreak > mainLongestStreak) {
+                streakRightCard.classList.add('winner');
+            }
+
+            // Largest Victory
+            const victoryLeftCard = document.getElementById('h2hCardVictoryLeft');
+            const victoryRightCard = document.getElementById('h2hCardVictoryRight');
+            victoryLeftCard.classList.remove('winner');
+            victoryRightCard.classList.remove('winner');
+            if (mainLargestVictory > compLargestVictory) {
+                victoryLeftCard.classList.add('winner');
+            } else if (compLargestVictory > mainLargestVictory) {
+                victoryRightCard.classList.add('winner');
+            }
+        }
+
+        function updateComparisonView() {
+            const articleHeader = document.querySelector('.article-header');
+            const headerText = document.querySelector('.header-text');
+            const comparisonHeader = document.getElementById('comparisonHeader');
+            const compareButton = document.querySelector('.compare-button');
+            const fixedColorsLeft = document.getElementById('fixedColorsLeft');
+            const fixedColorsRight = document.getElementById('fixedColorsRight');
+            const statsSection = document.querySelector('.stats-section');
+            const comparisonStatsContainer = document.getElementById('comparisonTeamStats');
+            const seasonSection = document.getElementById('seasonSection');
+            const opponentSection = document.getElementById('opponentSection');
+            const headToHeadSection = document.getElementById('headToHeadSection');
+
+            if (comparisonTeam) {
+                // Hide single team header text, show comparison header
+                headerText.style.display = 'none';
+                comparisonHeader.classList.add('active');
+
+                // Remove border-bottom from article-header (comparison-header has its own)
+                articleHeader.style.borderBottom = 'none';
+
+                // Add comparison mode class to stats section
+                statsSection.classList.add('comparison-mode');
+
+                // Apply comparison mode colors
+                applyComparisonColors();
+
+                // Populate comparison team stats
+                populateComparisonStats();
+
+                // Apply winner indicators (accent bars)
+                applyWinnerIndicators();
+
+                // Hide season and opponent sections, show head-to-head
+                seasonSection.style.display = 'none';
+                opponentSection.style.display = 'none';
+                headToHeadSection.style.display = 'block';
+
+                // Populate head-to-head table
+                populateHeadToHead();
+
+                // Transform Compare button into comparison team's logo
+                const compTeam = teamsData[comparisonTeam];
+                compareButton.textContent = compTeam.mascot.charAt(0).toUpperCase();
+                compareButton.style.backgroundColor = compTeam.colors[0];
+                compareButton.style.border = `5px solid ${compTeam.colors[1] || compTeam.colors[0]}`;
+                compareButton.style.color = compTeam.colors[1] || '#FFFFFF';
+                compareButton.style.fontFamily = 'Georgia, serif';
+                compareButton.style.fontSize = '3rem';
+                compareButton.style.fontWeight = '900';
+                compareButton.style.letterSpacing = '0';
+                compareButton.style.textTransform = 'none';
+
+                // Change Compare button to deselect mode
+                compareButton.onclick = function() {
+                    comparisonTeam = null;
+                    updateComparisonView();
+                };
+                compareButton.style.cursor = 'pointer';
+
+                // Populate comparison header (will also show fixed colors)
+                populateComparisonHeader();
+            } else {
+                // Show single team header text, hide comparison header
+                headerText.style.display = 'block';
+                comparisonHeader.classList.remove('active');
+
+                // Hide fixed color boxes
+                fixedColorsLeft.classList.remove('active');
+                fixedColorsRight.classList.remove('active');
+
+                // Hide comparison stats
+                comparisonStatsContainer.style.display = 'none';
+
+                // Restore border-bottom on article-header
+                articleHeader.style.borderBottom = '3px solid #000';
+
+                // Remove comparison mode class from stats section
+                statsSection.classList.remove('comparison-mode');
+
+                // Remove winner indicators
+                removeWinnerIndicators();
+
+                // Restore single profile mode color
+                applyStatValueColor();
+
+                // Show season and opponent sections, hide head-to-head
+                seasonSection.style.display = 'block';
+                opponentSection.style.display = 'block';
+                headToHeadSection.style.display = 'none';
+
+                // Restore Compare button to original state
+                compareButton.textContent = 'Compare Team';
+                compareButton.style.backgroundColor = 'white';
+                compareButton.style.border = '5px dashed #000';
+                compareButton.style.color = '#1a1a1a';
+                compareButton.style.fontFamily = "'Courier New', monospace";
+                compareButton.style.fontSize = '0.7rem';
+                compareButton.style.fontWeight = '700';
+                compareButton.style.letterSpacing = '0.5px';
+                compareButton.style.textTransform = 'uppercase';
+
+                // Change Compare button back to dropdown mode
+                compareButton.onclick = toggleDropdown;
+                compareButton.style.cursor = 'pointer';
+            }
+
+            // Update chart
+            updateChart();
+        }
+
+        function updateChart() {
+            chart.data = calculateChartData();
+            chart.options.plugins.legend.display = comparisonTeam !== null;
+            chart.update();
+        }
+
+        function populateComparisonHeader() {
+            const mainTeam = teamsData[currentTeam];
+            const compTeam = teamsData[comparisonTeam];
+
+            // Left side (Main team - Ridge View)
+            document.getElementById('comparisonNameLeft').textContent = mainTeam.name;
+            document.getElementById('comparisonMascotLeft').textContent = mainTeam.mascot;
+
+            const mainRecord = calculateAllTimeRecord(mainTeam.seasons);
+            document.getElementById('comparisonRecordLeft').textContent = `ALL-TIME: ${mainRecord}`;
+
+            // Right side (Comparison team - OABCIG)
+            document.getElementById('comparisonNameRight').textContent = compTeam.name;
+            document.getElementById('comparisonMascotRight').textContent = compTeam.mascot;
+
+            const compRecord = calculateAllTimeRecord(compTeam.seasons);
+            document.getElementById('comparisonRecordRight').textContent = `ALL-TIME: ${compRecord}`;
+
+            // Populate fixed color boxes under logos
+            const fixedColorsLeft = document.getElementById('fixedColorsLeft');
+            fixedColorsLeft.innerHTML = '';
+            fixedColorsLeft.classList.add('active');
+            mainTeam.colors.forEach(color => {
+                const box = document.createElement('div');
+                box.className = 'color-box';
+                box.style.backgroundColor = color;
+                fixedColorsLeft.appendChild(box);
+            });
+
+            const fixedColorsRight = document.getElementById('fixedColorsRight');
+            fixedColorsRight.innerHTML = '';
+            fixedColorsRight.classList.add('active');
+            compTeam.colors.forEach(color => {
+                const box = document.createElement('div');
+                box.className = 'color-box';
+                box.style.backgroundColor = color;
+                fixedColorsRight.appendChild(box);
+            });
+        }
+
+        function calculateAllTimeRecord(seasons) {
+            let totalWins = 0;
+            let totalLosses = 0;
+            let totalTies = 0;
+
+            seasons.forEach(season => {
+                totalWins += season.wins;
+                totalLosses += season.losses;
+                totalTies += season.ties || 0;
+            });
+
+            return `${totalWins}-${totalLosses}${totalTies > 0 ? '-' + totalTies : ''}`;
+        }
+
+        function filterTeams() {
+            const search = document.getElementById('teamSearch').value.toLowerCase();
+            const selectedConference = document.getElementById('comparisonConferenceFilter').value;
+            const selectedClass = document.getElementById('comparisonClassFilter').value;
+            const teams = document.querySelectorAll('.dropdown-team');
+
+            teams.forEach(team => {
+                const teamName = team.getAttribute('data-name');
+                const teamConference = team.getAttribute('data-conference');
+                const teamClass = team.getAttribute('data-class');
+
+                // Search filter
+                const matchesSearch = teamName.includes(search);
+
+                // Conference filter
+                const matchesConference = !selectedConference || teamConference === selectedConference;
+
+                // Class filter
+                const matchesClass = !selectedClass || teamClass === selectedClass;
+
+                // Show/hide based on AND logic
+                if (matchesSearch && matchesConference && matchesClass) {
+                    team.style.display = 'flex';
+                } else {
+                    team.style.display = 'none';
+                }
+            });
+        }
+
+        // Apply stat value color based on readability (single profile mode)
+        function applyStatValueColor() {
+            const currentTeamData = teamsData[currentTeam];
+            const statColor = determineStatValueColor(currentTeamData.colors);
+
+            // Update CSS variable for stat values
+            document.documentElement.style.setProperty('--stat-value-color', statColor);
+        }
+
+        // Apply comparison mode colors
+        function applyComparisonColors() {
+            const mainTeamData = teamsData[currentTeam];
+            const compTeamData = teamsData[comparisonTeam];
+
+            // Determine colors for both teams
+            const colors = determineComparisonColors(mainTeamData.colors, compTeamData.colors);
+
+            // Apply main team color (left side)
+            document.documentElement.style.setProperty('--stat-value-color', colors.mainColor);
+
+            // Store comparison color for future use (will be used when we display right-side stats)
+            document.documentElement.style.setProperty('--comparison-stat-value-color', colors.comparisonColor);
+        }
+
+        // Apply winner indicators (accent bars) in comparison mode
+        function applyWinnerIndicators() {
+            const compTeam = teamsData[comparisonTeam];
+            if (!compTeam || !compTeam.stats) return;
+
+            // Main team (Ridge View) stats - hardcoded for now
+            const mainStats = {
+                winLoss: 0.600,
+                stateTitles: 0,
+                playoffApps: 1,
+                playoffRecord: 0.500,
+                districtRecord: 0.800
+            };
+
+            // Comparison team stats - parse from teamsData
+            const compStats = {
+                winLoss: parseFloat(compTeam.stats.winLoss.value) || 0,
+                stateTitles: parseFloat(compTeam.stats.stateTitles.value) || 0,
+                playoffApps: parseFloat(compTeam.stats.playoffApps.value) || 0,
+                playoffRecord: compTeam.stats.playoffRecord.value === '---' ? null : parseFloat(compTeam.stats.playoffRecord.value) || 0,
+                districtRecord: compTeam.stats.districtRecord.value === '---' ? null : parseFloat(compTeam.stats.districtRecord.value) || 0
+            };
+
+            // Get stat items from both containers
+            const mainStatItems = document.querySelectorAll('#mainTeamStats .stat-item');
+            const compStatItems = document.querySelectorAll('#comparisonTeamStats .stat-item');
+
+            // Stat keys in order they appear
+            const statKeys = ['winLoss', 'stateTitles', 'playoffApps', 'playoffRecord', 'districtRecord'];
+
+            // Compare each stat and apply winner class
+            statKeys.forEach((key, index) => {
+                const mainItem = mainStatItems[index];
+                const compItem = compStatItems[index];
+
+                if (!mainItem || !compItem) return;
+
+                // Remove existing winner classes
+                mainItem.classList.remove('winner');
+                compItem.classList.remove('winner');
+
+                const mainVal = mainStats[key];
+                const compVal = compStats[key];
+
+                // Handle cases where one or both teams have no data
+                const mainHasData = mainVal !== null && mainVal !== undefined;
+                const compHasData = compVal !== null && compVal !== undefined;
+
+                // If neither has data, it's a tie (no winner)
+                if (!mainHasData && !compHasData) return;
+
+                // If only main team has data, main team wins
+                if (mainHasData && !compHasData) {
+                    mainItem.classList.add('winner');
+                    return;
+                }
+
+                // If only comparison team has data, comparison team wins
+                if (!mainHasData && compHasData) {
+                    compItem.classList.add('winner');
+                    return;
+                }
+
+                // Both have data - compare values
+                if (mainVal > compVal) {
+                    mainItem.classList.add('winner');
+                } else if (compVal > mainVal) {
+                    compItem.classList.add('winner');
+                }
+                // If equal, neither gets the winner class (tie)
+            });
+        }
+
+        // Remove winner indicators when exiting comparison mode
+        function removeWinnerIndicators() {
+            const allStatItems = document.querySelectorAll('.stat-item');
+            allStatItems.forEach(item => item.classList.remove('winner'));
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            applyStatValueColor();
+            initChart();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('teamDropdown');
+            const button = document.querySelector('.compare-button');
+            if (!dropdown.contains(event.target) && event.target !== button) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Opponent Table Filtering
+        function initializeOpponentFilters() {
+            const table = document.getElementById('opponentTable');
+            const rows = table.querySelectorAll('tbody tr');
+            const searchInput = document.getElementById('opponentSearch');
+            const conferenceFilter = document.getElementById('conferenceFilter');
+            const classFilter = document.getElementById('classFilter');
+            const stateFilter = document.getElementById('stateFilter');
+
+            // Collect unique values for filters
+            const conferences = new Set();
+            const classes = new Set();
+            const states = new Set();
+
+            rows.forEach(row => {
+                const conference = row.getAttribute('data-conference');
+                const classVal = row.getAttribute('data-class');
+                const state = row.getAttribute('data-state');
+
+                if (conference) conferences.add(conference);
+                if (classVal) classes.add(classVal);
+                if (state) states.add(state);
+            });
+
+            // Populate conference dropdown
+            conferences.forEach(conf => {
+                const option = document.createElement('option');
+                option.value = conf;
+                option.textContent = conf;
+                conferenceFilter.appendChild(option);
+            });
+
+            // Populate class dropdown
+            classes.forEach(cls => {
+                const option = document.createElement('option');
+                option.value = cls;
+                option.textContent = cls;
+                classFilter.appendChild(option);
+            });
+
+            // Populate state dropdown and show/hide based on out-of-state opponents
+            const hasOutOfState = Array.from(states).some(state => state && state !== 'Iowa');
+            if (hasOutOfState) {
+                stateFilter.style.display = 'block';
+                states.forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state;
+                    option.textContent = state;
+                    stateFilter.appendChild(option);
+                });
+            }
+
+            // Filter function
+            function filterOpponents() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedConference = conferenceFilter.value;
+                const selectedClass = classFilter.value;
+                const selectedState = stateFilter.value;
+
+                rows.forEach(row => {
+                    const opponent = row.getAttribute('data-opponent').toLowerCase();
+                    const conference = row.getAttribute('data-conference');
+                    const classVal = row.getAttribute('data-class');
+                    const state = row.getAttribute('data-state');
+
+                    // Search filter
+                    const matchesSearch = opponent.includes(searchTerm);
+
+                    // Conference filter
+                    const matchesConference = !selectedConference || conference === selectedConference;
+
+                    // Class filter (exclude out-of-state teams from class/conference filters)
+                    const matchesClass = !selectedClass || (state === 'Iowa' && classVal === selectedClass);
+
+                    // State filter
+                    const matchesState = !selectedState || state === selectedState;
+
+                    // Show/hide row based on AND logic
+                    if (matchesSearch && matchesConference && matchesClass && matchesState) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            // Attach event listeners
+            searchInput.addEventListener('input', filterOpponents);
+            conferenceFilter.addEventListener('change', filterOpponents);
+            classFilter.addEventListener('change', filterOpponents);
+            stateFilter.addEventListener('change', filterOpponents);
+        }
+
+        // Initialize filters on page load
+        initializeOpponentFilters();
+
+        // Table Sorting
+        function initializeTableSorting() {
+            const table = document.getElementById('opponentTable');
+            const headers = table.querySelectorAll('th.sortable');
+            let currentSort = { column: null, direction: 'asc' };
+
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    const sortType = this.getAttribute('data-sort');
+                    const tbody = table.querySelector('tbody');
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                    // Determine sort direction
+                    if (currentSort.column === sortType) {
+                        currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        currentSort.direction = 'asc';
+                    }
+                    currentSort.column = sortType;
+
+                    // Remove sort classes from all headers
+                    headers.forEach(h => {
+                        h.classList.remove('sort-asc', 'sort-desc');
+                    });
+
+                    // Add sort class to current header
+                    this.classList.add(currentSort.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+
+                    // Get column index
+                    const columnIndex = Array.from(this.parentElement.children).indexOf(this);
+
+                    // Sort rows
+                    rows.sort((a, b) => {
+                        let aValue = a.children[columnIndex].textContent.trim();
+                        let bValue = b.children[columnIndex].textContent.trim();
+
+                        // Handle numeric sorting
+                        if (sortType !== 'opponent') {
+                            // Convert win percentage like "1.000" or ".000" to number
+                            aValue = parseFloat(aValue) || 0;
+                            bValue = parseFloat(bValue) || 0;
+                        }
+
+                        // Compare values
+                        if (typeof aValue === 'string') {
+                            // Text sorting (case-insensitive)
+                            return currentSort.direction === 'asc'
+                                ? aValue.localeCompare(bValue)
+                                : bValue.localeCompare(aValue);
+                        } else {
+                            // Numeric sorting
+                            return currentSort.direction === 'asc'
+                                ? aValue - bValue
+                                : bValue - aValue;
+                        }
+                    });
+
+                    // Re-append sorted rows
+                    rows.forEach(row => tbody.appendChild(row));
+                });
+            });
+        }
+
+        // Initialize sorting on page load
+        initializeTableSorting();
+    </script>
+</body>
+</html>

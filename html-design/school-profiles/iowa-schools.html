@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iowa Schools - High School Wins</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: #e8e3d3;
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 4px solid #000;
+        }
+
+        .site-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .site-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .site-title a:hover {
+            opacity: 0.8;
+        }
+
+        .site-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .breadcrumb a {
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            margin: 0 0.5rem;
+            color: #888;
+        }
+
+        /* Selection Card */
+        .selection-card {
+            background: white;
+            border: 3px solid #000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .selection-header {
+            background-color: #f9f3e8;
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid #000;
+            text-align: center;
+        }
+
+        .selection-header h1 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .selection-header p {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: #555;
+        }
+
+        /* School List */
+        .school-list {
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .school-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: inherit;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.15s ease;
+        }
+
+        .school-card:last-child {
+            border-bottom: none;
+        }
+
+        .school-card:hover {
+            background-color: #f5f0e5;
+        }
+
+        .school-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .school-name {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Filter Controls */
+        .filter-header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #ddd;
+            background: #f9f3e8;
+            gap: 0.75rem;
+        }
+
+        .filter-input,
+        .filter-select {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            padding: 0.5rem 0.75rem;
+            border: 2px solid #ccc;
+            background: white;
+            color: #1a1a1a;
+            border-radius: 0;
+        }
+
+        .filter-input {
+            width: 180px;
+        }
+
+        .filter-select {
+            min-width: 140px;
+            cursor: pointer;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: #000;
+        }
+
+        .no-results {
+            padding: 2rem;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            color: #888;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: #888;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="site-header">
+            <div>
+                <div class="site-title"><a href="../index.html">HIGH SCHOOL WINS</a></div>
+                <div class="site-subtitle">Sports Archive Collection</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="../index.html">HOME</a>
+            <span>&gt;</span>
+            <strong>IOWA</strong>
+        </div>
+
+        <!-- Selection Card -->
+        <div class="selection-card">
+            <div class="selection-header">
+                <h1>Iowa Schools</h1>
+                <p>Select a school to view sports archives</p>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="filter-header">
+                <input type="text" id="schoolSearch" class="filter-input" placeholder="Search schools...">
+                <select id="conferenceFilter" class="filter-select">
+                    <option value="">All Conferences</option>
+                </select>
+            </div>
+
+            <!-- School List -->
+            <div class="school-list" id="schoolList">
+                <a href="ridge-view.html" class="school-card" data-name="ridge view raptors" data-conference="Western Valley">
+                    <div class="school-logo" style="background-color: #FF8C00; border: 3px solid #FFD700; color: #000;">R</div>
+                    <div class="school-name">Ridge View Raptors</div>
+                </a>
+            </div>
+            <div class="no-results" id="noResults">No schools match your filters</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        HIGH SCHOOL WINS &bull; SPORTS ARCHIVE COLLECTION
+    </footer>
+
+    <script>
+        // School Filtering
+        function initializeSchoolFilters() {
+            const schoolList = document.getElementById('schoolList');
+            const schools = schoolList.querySelectorAll('.school-card');
+            const searchInput = document.getElementById('schoolSearch');
+            const conferenceFilter = document.getElementById('conferenceFilter');
+            const noResults = document.getElementById('noResults');
+
+            // Collect unique conferences
+            const conferences = new Set();
+
+            schools.forEach(school => {
+                const conference = school.getAttribute('data-conference');
+                if (conference) conferences.add(conference);
+            });
+
+            // Sort and populate conference dropdown
+            Array.from(conferences).sort().forEach(conf => {
+                const option = document.createElement('option');
+                option.value = conf;
+                option.textContent = conf;
+                conferenceFilter.appendChild(option);
+            });
+
+            // Filter function
+            function filterSchools() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedConference = conferenceFilter.value;
+
+                let visibleCount = 0;
+
+                schools.forEach(school => {
+                    const name = school.getAttribute('data-name');
+                    const conference = school.getAttribute('data-conference');
+
+                    const matchesSearch = name.includes(searchTerm);
+                    const matchesConference = !selectedConference || conference === selectedConference;
+
+                    if (matchesSearch && matchesConference) {
+                        school.style.display = '';
+                        visibleCount++;
+                    } else {
+                        school.style.display = 'none';
+                    }
+                });
+
+                // Show/hide no results message
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+
+            // Attach event listeners
+            searchInput.addEventListener('input', filterSchools);
+            conferenceFilter.addEventListener('change', filterSchools);
+        }
+
+        // Initialize on page load
+        initializeSchoolFilters();
+    </script>
+</body>
+</html>

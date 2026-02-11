@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ridge View Raptors - All Time Game Log - High School Wins</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: #e8e3d3;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 4px solid #000;
+        }
+
+        .site-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .site-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .site-title a:hover {
+            opacity: 0.8;
+        }
+
+        .site-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Catalog Card */
+        .catalog-card {
+            background: white;
+            border: 3px solid #000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* Classification Bar */
+        .classification-bar {
+            background-color: #f9f3e8;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 3px solid #000;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .catalog-number {
+            position: absolute;
+            right: 1.5rem;
+            top: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            border-bottom: 1px dashed #1a1a1a;
+        }
+
+        .breadcrumb-link:hover {
+            color: #000;
+            border-bottom: 1px solid #000;
+        }
+
+        /* Filing Bar */
+        .filing-bar {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 3px solid #000;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+        }
+
+        .filing-item {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filing-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filing-value {
+            color: #666;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 3px solid #000;
+            position: relative;
+        }
+
+        .team-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #FF8C00;
+            border: 5px solid #FFD700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #000000;
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+        }
+
+        .back-button {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.75rem 1.5rem;
+            background: #1a1a1a;
+            color: white;
+            border: 2px solid #000;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .back-button:hover {
+            background: #f9f3e8;
+            color: #1a1a1a;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .page-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        /* Summary Stats */
+        .summary-section {
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid #000;
+            background: #f9f3e8;
+        }
+
+        .summary-grid {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #FF8C00;
+        }
+
+        .summary-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+
+        /* Season Section */
+        .season-section {
+            padding: 2rem;
+            border-bottom: 3px solid #000;
+        }
+
+        .section-title {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            border-bottom: 2px solid #000;
+            padding-bottom: 0.5rem;
+        }
+
+        .season-record {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Game Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #000;
+        }
+
+        thead {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        th {
+            padding: 0.75rem;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            border: 1px solid #000;
+        }
+
+        td {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9f6f0;
+        }
+
+        tbody tr:hover {
+            background: #f9f3e8;
+        }
+
+        /* Result styling */
+        .result-win {
+            color: #228B22;
+            font-weight: 700;
+        }
+
+        .result-loss {
+            color: #B22222;
+            font-weight: 700;
+        }
+
+        .result-tie {
+            color: #666;
+            font-weight: 700;
+        }
+
+        /* Game type badges */
+        .game-type {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: #666;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        .playoff-badge {
+            background: #FFD700;
+            color: #1a1a1a;
+            padding: 0.15rem 0.4rem;
+            border-radius: 2px;
+            font-weight: 700;
+        }
+
+        .district-badge {
+            background: #e8e3d3;
+            color: #1a1a1a;
+            padding: 0.15rem 0.4rem;
+            border-radius: 2px;
+            border: 1px solid #ccc;
+        }
+
+        /* Source Note */
+        .source-note {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #666;
+            padding: 1rem 2rem;
+            background: #f9f3e8;
+            border-top: 2px solid #ccc;
+            text-align: center;
+        }
+
+        .source-note a {
+            color: #1a1a1a;
+        }
+
+        .source-link {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px dashed #888;
+        }
+
+        .source-link:hover {
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.75rem;
+            }
+            .team-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 2.5rem;
+            }
+            .back-button {
+                position: static;
+                display: block;
+                margin: 1rem auto 0;
+                width: fit-content;
+            }
+            table {
+                font-size: 0.8rem;
+            }
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="site-header">
+            <div>
+                <div class="site-title"><a href="../index.html">HIGH SCHOOL WINS</a></div>
+                <div class="site-subtitle">Sports Archive Collection</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Catalog Card -->
+        <div class="catalog-card">
+            <!-- Classification Bar -->
+            <div class="classification-bar">
+                <span>CLASSIFICATION: <a href="iowa-schools.html" class="breadcrumb-link">IOWA</a> &gt; RIDGE VIEW &gt; FOOTBALL &gt; GAME LOG</span>
+                <span class="catalog-number">CAT. NO. IA-FTB-WVC-RV-GL</span>
+            </div>
+
+            <!-- Filing Bar -->
+            <div class="filing-bar">
+                <div class="filing-item">
+                    <span class="filing-label">DOCUMENT TYPE:</span>
+                    <span class="filing-value">All Time Game Log</span>
+                </div>
+                <div class="filing-item">
+                    <span class="filing-label">TEAM:</span>
+                    <span class="filing-value">Ridge View Raptors</span>
+                </div>
+                <div class="filing-item">
+                    <span class="filing-label">SPORT:</span>
+                    <span class="filing-value">Football</span>
+                </div>
+                <div class="filing-item">
+                    <span class="filing-label">TOTAL GAMES:</span>
+                    <span class="filing-value">10</span>
+                </div>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="team-logo">R</div>
+                <a href="ridge-view.html" class="back-button">&larr; Back to Profile</a>
+                <h1 class="page-title">All Time Game Log</h1>
+                <p class="page-subtitle">Ridge View Raptors Football</p>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="summary-section">
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-value">10</div>
+                        <div class="summary-label">Total Games</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value">6</div>
+                        <div class="summary-label">Wins</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value">4</div>
+                        <div class="summary-label">Losses</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value">.600</div>
+                        <div class="summary-label">Win %</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value">247</div>
+                        <div class="summary-label">Points For</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value">189</div>
+                        <div class="summary-label">Points Against</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2025 Season -->
+            <div class="season-section">
+                <h3 class="section-title">2025 Season</h3>
+                <div class="season-record">Record: 6-4 (4-1 District) | Playoff Result: Second Round | Class: 1A</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Opponent</th>
+                            <th>Result</th>
+                            <th>Score</th>
+                            <th>Location</th>
+                            <th>Notes</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aug 29, 2025</td>
+                            <td>OABCIG Falcons</td>
+                            <td><span class="result-loss">L</span></td>
+                            <td>7-24</td>
+                            <td>Holstein</td>
+                            <td>Season Opener</td>
+                            <td><a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank" class="source-link">GoBound</a></td>
+                        </tr>
+                        <tr>
+                            <td>Sep 5, 2025</td>
+                            <td>South Central Calhoun Titans</td>
+                            <td><span class="result-win">W</span></td>
+                            <td>28-6</td>
+                            <td>Holstein</td>
+                            <td></td>
+                            <td><a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank" class="source-link">GoBound</a></td>
+                        </tr>
+                        <tr>
+                            <td>Sep 12, 2025</td>
+                            <td>@ Cherokee Washington Braves</td>
+                            <td><span class="result-loss">L</span></td>
+                            <td>7-44</td>
+                            <td>--</td>
+                            <td>Homecoming Game</td>
+                            <td><a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank" class="source-link">GoBound</a></td>
+                        </tr>
+                        <tr>
+                            <td>Sep 19, 2025</td>
+                            <td>@ Hinton Blackhawks</td>
+                            <td><span class="result-win">W</span></td>
+                            <td>23-14</td>
+                            <td>--</td>
+                            <td><span class="game-type district-badge">District</span> Youth Football Night</td>
+                            <td><a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank" class="source-link">GoBound</a></td>
+                        </tr>
+                        <tr>
+                            <td>Sep 26, 2025</td>
+                            <td>Lawton-Bronson Eagles</td>
+                            <td><span class="result-win">W</span></td>
+                            <td>42-0</td>
+                            <td>Holstein</td>
+                            <td><span class="game-type district-badge">District</span> Homecoming</td>
+                            <td><a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank" class="source-link">GoBound</a></td>
+                        </tr>
+                        <tr>
+                            <td>Oct 3, 2025</td>
+                            <td>West Lyon Wildcats</td>
+                            <td><span class="result-loss">L</span></td>
+                            <td>7-48</td>
+                            <td>Holstein</td>
+                            <td><span class="game-type district-badge">District</span> Senior Night</td>
+                            <td><a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank" class="source-link">GoBound</a></td>
+                        </tr>
+                        <tr>
+                            <td>Oct 10, 2025</td>
+                            <td>@ Alta-Aurelia Warriors</td>
+                            <td><span class="result-win">W</span></td>
+                            <td>52-14</td>
+                            <td>--</td>
+                            <td><span class="game-type district-badge">District</span></td>
+                            <td><a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank" class="source-link">GoBound</a></td>
+                        </tr>
+                        <tr>
+                            <td>Oct 17, 2025</td>
+                            <td>@ MVAOCOU Rams</td>
+                            <td><span class="result-win">W</span></td>
+                            <td>39-12</td>
+                            <td>--</td>
+                            <td><span class="game-type district-badge">District</span></td>
+                            <td><a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank" class="source-link">GoBound</a></td>
+                        </tr>
+                        <tr>
+                            <td>Oct 24, 2025</td>
+                            <td>Tri-Center Trojans</td>
+                            <td><span class="result-win">W</span></td>
+                            <td>42-27</td>
+                            <td>Holstein</td>
+                            <td><span class="game-type playoff-badge">Playoff</span> Class 1A First Round</td>
+                            <td><a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank" class="source-link">GoBound</a></td>
+                        </tr>
+                        <tr>
+                            <td>Oct 31, 2025</td>
+                            <td>@ South Hardin Tigers</td>
+                            <td><span class="result-loss">L</span></td>
+                            <td>0-20</td>
+                            <td>--</td>
+                            <td><span class="game-type playoff-badge">Playoff</span> Class 1A Second Round</td>
+                            <td><a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank" class="source-link">GoBound</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Source Note -->
+            <div class="source-note">
+                Data sourced from <a href="https://www.gobound.com/ia/ihsaa/football/2025-26/ridgeview/v/schedule" target="_blank">gobound.com</a> - Iowa High School Athletic Association Official Records
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 High School Wins - Iowa High School Football Archive</p>
+    </footer>
+</body>
+</html>

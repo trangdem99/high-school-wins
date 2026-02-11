@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High School Wins - Sports Archive Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: #e8e3d3;
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 4px solid #000;
+        }
+
+        .site-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .site-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Selection Card */
+        .selection-card {
+            background: white;
+            border: 3px solid #000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .selection-header {
+            background-color: #f9f3e8;
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid #000;
+            text-align: center;
+        }
+
+        .selection-header h1 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .selection-header p {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: #555;
+        }
+
+        /* State Grid */
+        .state-grid {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .state-card {
+            background: #f9f3e8;
+            border: 2px solid #000;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .state-card:hover {
+            background: #1a1a1a;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .state-card.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .state-name {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .state-info {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .state-card:hover .state-info {
+            color: #ccc;
+        }
+
+        /* Coming Soon States */
+        .coming-soon-section {
+            padding: 0 2rem 2rem;
+            border-top: 2px dashed #ccc;
+            margin-top: 1rem;
+        }
+
+        .coming-soon-header {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: #888;
+            text-align: center;
+            padding: 1.5rem 0 1rem;
+            text-transform: uppercase;
+        }
+
+        .coming-soon-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .coming-soon-state {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: #aaa;
+            padding: 0.5rem 1rem;
+            border: 1px dashed #ccc;
+            background: #f5f5f5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: #888;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="site-header">
+            <div>
+                <div class="site-title">HIGH SCHOOL WINS</div>
+                <div class="site-subtitle">Sports Archive Collection</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Selection Card -->
+        <div class="selection-card">
+            <div class="selection-header">
+                <h1>Select a State</h1>
+                <p>Choose a state to browse high school sports archives</p>
+            </div>
+
+            <!-- Available States -->
+            <div class="state-grid">
+                <a href="school-profiles/iowa-schools.html" class="state-card">
+                    <div class="state-name">Iowa</div>
+                    <div class="state-info">1 Team Available</div>
+                </a>
+            </div>
+
+            <!-- Coming Soon States -->
+            <div class="coming-soon-section">
+                <div class="coming-soon-header">More States Coming Soon</div>
+                <div class="coming-soon-grid">
+                    <span class="coming-soon-state">Minnesota</span>
+                    <span class="coming-soon-state">Nebraska</span>
+                    <span class="coming-soon-state">South Dakota</span>
+                    <span class="coming-soon-state">Wisconsin</span>
+                    <span class="coming-soon-state">Illinois</span>
+                    <span class="coming-soon-state">Missouri</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        HIGH SCHOOL WINS &bull; SPORTS ARCHIVE COLLECTION
+    </footer>
+</body>
+</html>

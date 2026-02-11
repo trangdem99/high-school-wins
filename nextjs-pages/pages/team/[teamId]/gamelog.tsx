@@ -78,19 +78,8 @@ export default function GameLogPage({ teamId, team }: GameLogPageProps) {
             </div>
 
             {/* Page header */}
-            <div className="article-header" style={{ position: 'relative', paddingLeft: '140px' }}>
-              <div
-                className="team-logo team-logo-sm"
-                style={{
-                  position: 'absolute',
-                  left: 'var(--space-lg)',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  zIndex: 1,
-                }}
-              >
-                {team.letter}
-              </div>
+            <div className="article-header gamelog-header">
+              <div className="team-logo team-logo-sm">{team.letter}</div>
               <Link href={`/team/${teamId}`} className="back-button">
                 &larr; Back to Profile
               </Link>

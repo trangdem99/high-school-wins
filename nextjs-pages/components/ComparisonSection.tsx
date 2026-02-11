@@ -13,7 +13,12 @@ export function ComparisonHeader({ leftTeam, rightTeam, leftRecord, rightRecord 
     <div className="comparison-header active">
       <div className="comparison-split">
         <div className="comparison-team left">
-          <TeamLogo team={leftTeam} size="md" />
+          <TeamLogo team={leftTeam} size="lg" />
+          <div className="team-colors" style={{ justifyContent: 'center' }}>
+            <div className="color-box" style={{ backgroundColor: leftTeam.colors.primary }} />
+            <div className="color-box" style={{ backgroundColor: leftTeam.colors.secondary }} />
+            <div className="color-box" style={{ backgroundColor: leftTeam.colors.tertiary }} />
+          </div>
           <h1 className="comparison-headline" style={{ color: leftTeam.colors.primary }}>
             {leftTeam.name}
           </h1>
@@ -22,7 +27,12 @@ export function ComparisonHeader({ leftTeam, rightTeam, leftRecord, rightRecord 
           <div className="comparison-record">ALL-TIME: {leftRecord}</div>
         </div>
         <div className="comparison-team right">
-          <TeamLogo team={rightTeam} size="md" />
+          <TeamLogo team={rightTeam} size="lg" />
+          <div className="team-colors" style={{ justifyContent: 'center' }}>
+            <div className="color-box" style={{ backgroundColor: rightTeam.colors.primary }} />
+            <div className="color-box" style={{ backgroundColor: rightTeam.colors.secondary }} />
+            <div className="color-box" style={{ backgroundColor: rightTeam.colors.tertiary }} />
+          </div>
           <h1 className="comparison-headline" style={{ color: rightTeam.colors.primary }}>
             {rightTeam.name}
           </h1>
@@ -68,7 +78,14 @@ export function ComparisonStats({ leftStats, rightStats, leftColor, rightColor, 
                   style={isWinner ? { borderLeftColor: leftColor } : undefined}
                 >
                   <div className="stat-label">{stat.label}</div>
-                  <div className="stat-value" style={{ color: leftColor }}>{stat.value}</div>
+                  <div className="stat-value" style={{ color: leftColor }}>
+                    {stat.value}
+                    {stat.rank && (
+                      <span className="stat-rank-badge">
+                        Rank: <span className="rank-position">{stat.rank}</span>
+                      </span>
+                    )}
+                  </div>
                   {stat.record && <div className="stat-record">{stat.record}</div>}
                   {stat.note && <div className="stat-note">{stat.note}</div>}
                 </div>
@@ -89,7 +106,14 @@ export function ComparisonStats({ leftStats, rightStats, leftColor, rightColor, 
                   style={isWinner ? { borderLeftColor: rightColor } : undefined}
                 >
                   <div className="stat-label">{stat.label}</div>
-                  <div className="stat-value" style={{ color: rightColor }}>{stat.value}</div>
+                  <div className="stat-value" style={{ color: rightColor }}>
+                    {stat.value}
+                    {stat.rank && (
+                      <span className="stat-rank-badge">
+                        Rank: <span className="rank-position">{stat.rank}</span>
+                      </span>
+                    )}
+                  </div>
                   {stat.record && <div className="stat-record">{stat.record}</div>}
                   {stat.note && <div className="stat-note">{stat.note}</div>}
                 </div>
@@ -162,10 +186,11 @@ export function HeadToHeadSection({
       <h3 className="section-title">III. Head to Head</h3>
       <div className="h2h-matchups-note">&#9733; Total Match-ups = {totalGames} &#9733;</div>
 
-      {statRows.map((row, i) => (
-        <div className="h2h-wins-cards" key={i}>
-          <div className="h2h-card-container left">
+      <div className="h2h-stats-columns">
+        <div className="h2h-stats-column left">
+          {statRows.map((row, i) => (
             <div
+              key={i}
               className={`h2h-card ${row.leftVal > row.rightVal ? 'winner' : ''}`}
               style={row.leftVal > row.rightVal ? { borderLeftColor: leftColor } : undefined}
             >
@@ -175,9 +200,12 @@ export function HeadToHeadSection({
               </div>
               {row.leftNote && <div className="h2h-card-note">{row.leftNote}</div>}
             </div>
-          </div>
-          <div className="h2h-card-container right">
+          ))}
+        </div>
+        <div className="h2h-stats-column right">
+          {statRows.map((row, i) => (
             <div
+              key={i}
               className={`h2h-card ${row.rightVal > row.leftVal ? 'winner' : ''}`}
               style={row.rightVal > row.leftVal ? { borderLeftColor: rightColor } : undefined}
             >
@@ -187,18 +215,18 @@ export function HeadToHeadSection({
               </div>
               {row.rightNote && <div className="h2h-card-note">{row.rightNote}</div>}
             </div>
-          </div>
+          ))}
         </div>
-      ))}
+      </div>
 
       <div className="head-to-head-container table-responsive">
         <table>
           <thead>
             <tr>
-              <th>Date</th>
-              <th className="team-column" style={{ textAlign: 'center' }}>{leftTeam.name}</th>
-              <th className="team-column" style={{ textAlign: 'center' }}>{rightTeam.name}</th>
-              <th>Notes</th>
+              <th style={{ width: '20%' }}>Date</th>
+              <th className="team-column" style={{ width: '25%', textAlign: 'center' }}>{leftTeam.name}</th>
+              <th className="team-column" style={{ width: '25%', textAlign: 'center' }}>{rightTeam.name}</th>
+              <th style={{ width: '30%' }}>Notes</th>
             </tr>
           </thead>
           <tbody>
