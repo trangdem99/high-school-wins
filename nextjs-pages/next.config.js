@@ -5,9 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Set basePath if deploying to https://<user>.github.io/<repo>/
-  // basePath: '/high-school-wins',
-  // assetPrefix: '/high-school-wins/',
+  basePath: '/high-school-wins',
+  assetPrefix: '/high-school-wins/',
 };
 
 module.exports = nextConfig;
